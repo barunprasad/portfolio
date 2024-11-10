@@ -1,0 +1,105 @@
+.cardListItem {
+  --border-angle: 0turn;
+  --main-bg: conic-gradient(
+    from var(--border-angle),
+    #213,
+    #112 5%,
+    #112 60%,
+    #213 95%
+  );
+
+  // --main-bg: conic-gradient(
+  //   from var(--border-angle),
+  //   var(--snow-colors-grey-100),
+  //   var(--snow-colors-grey-50) 5%,
+  //   var(--snow-colors-grey-50) 60%,
+  //   var(--snow-colors-grey-100) 95%
+  // );
+
+  width: 100%;
+  // max-width: 320px;
+  padding: 16px;
+  border-radius: 6px;
+  // background-color: var(--snow-colors-grey-50);
+  color: var(--snow-colors-neutral-0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s ease;
+  border: 1px solid transparent; // Default transparent border
+
+  &:hover {
+    --gradient-border: conic-gradient(
+      from var(--border-angle),
+      transparent 25%,
+      var(--snow-colors-info-main),
+      var(--snow-colors-error-main),
+      transparent
+    );
+
+    background-color: #232b3e;
+    background:
+      var(--main-bg) padding-box,
+      var(--gradient-border) border-box,
+      var(--main-bg) border-box;
+    animation: rotate-border 3s linear infinite;
+  }
+
+  .icon {
+    margin-bottom: 12px;
+    font-size: 24px;
+    color: var(--snow-colors-primary-main);
+  }
+
+  .text {
+    text-align: center;
+    color: var(--snow-colors-grey-800);
+
+    strong {
+      display: block;
+      font-weight: bold;
+      color: var(--snow-colors-neutral-1000);
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    p {
+      margin: 0;
+      color: var(--snow-colors-grey-800);
+    }
+  }
+
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.responsiveRow {
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+    gap: 4px;
+
+    .header {
+      text-align: left;
+      color: var(--snow-colors-neutral-1000);
+    }
+  }
+}
+
+// Keyframes for rotating border gradient on hover
+@keyframes rotate-border {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0turn;
+}

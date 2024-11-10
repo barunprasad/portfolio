@@ -1,95 +1,52 @@
-import Image from 'next/image';
-import styles from './page.module.css';
-
-export default function Home() {
+import { Sections, SocialMediaLinks } from './data';
+import { InlinePageNavigation } from './InlinePageNavigation';
+import { Section } from './Section';
+import styles from './page.module.scss';
+import { SideMenu } from '@/ui/components/SideMenu/SideMenu';
+import { ActiveSectionProvider } from '@/ui/components/ActiveSection/ActiveSectionContext';
+import ScrollSection from '@/ui/components/ActiveSection/ScrollSection';
+export default function Index() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <ActiveSectionProvider>
+      <SideMenu />
+      <main className={styles.container}>
+        <section className={styles.intro}>
+          <div>
+            <h1>Barun Prasad</h1>
+            <h2>Frontend Evangelist</h2>
+            <h3>Transforming ideas into creative solutions.</h3>
+            <InlinePageNavigation />
+          </div>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+          <ul aria-label="Social Media" className={styles.socialMediaLinks}>
+            {SocialMediaLinks.map(({ href, label, icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`${label} (opens in a new tab)`}
+                  title={label}
+                >
+                  <span className={styles.srOnly}>{label}</span>
+                  {icon}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <ScrollSection className={styles.detail}>
+          {Sections.map((item) => (
+            <Section
+              key={item.label}
+              id={item.label}
+              label={item.label}
+              content={item.content}
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
+          ))}
+        </ScrollSection>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </ActiveSectionProvider>
   );
 }

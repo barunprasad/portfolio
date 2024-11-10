@@ -1,0 +1,36 @@
+.themeToggle {
+  width: 50px;
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  background-color: #ddd;
+  padding: 3px;
+
+  .toggleIcon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+  }
+
+  .icon {
+    width: 14px;
+    height: 14px;
+
+    &.lightModeIcon {
+      color: var(--snow-colors-primary-900);
+    }
+
+    &.darkModeIcon {
+      color: #f1c40f;
+      color: var(--snow-colors-primary-900);
+    }
+  }
+}

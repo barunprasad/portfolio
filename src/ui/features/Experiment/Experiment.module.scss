@@ -1,0 +1,109 @@
+.skillsList {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--snow-colors-grey-900);
+
+  .skillsListItem {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 2px solid var(--snow-colors-grey-200); /* Base border color */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--snow-colors-grey-50);
+    cursor: default;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--snow-colors-grey-100);
+    }
+
+    // Pseudo-element for the "train" animation
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      padding: 2px; /* Offset for train effect */
+      background: conic-gradient(
+        from 0deg,
+        var(--snow-colors-grey-200),
+        var(--snow-colors-grey-200) 25%,
+        /* Base color */ #ff0080 25%,
+        /* Train start color */ #ff8c00 30%,
+        #40e0d0 35%,
+        #8a2be2 40%,
+        var(--snow-colors-grey-200) 45% /* Return to base */
+      );
+      mask: radial-gradient(
+        farthest-side,
+        transparent calc(100% - 2px),
+        #000 0
+      );
+      z-index: 1;
+      animation: border-train 3s linear infinite;
+    }
+
+    .icon {
+      margin-right: 12px;
+      font-size: 24px;
+      color: var(--snow-colors-primary-main);
+      width: 24px;
+      height: 24px;
+    }
+
+    .text {
+      position: relative;
+      color: #333;
+
+      strong {
+        display: block;
+        font-weight: bold;
+        color: var(--snow-colors-neutral-1000);
+        margin-bottom: 4px;
+      }
+
+      p {
+        margin: 0;
+        color: var(--snow-colors-grey-800);
+        transition: color 0.3s ease;
+      }
+    }
+
+    &:hover .text p {
+      color: var(--snow-colors-grey-900);
+    }
+  }
+}
+
+// Keyframes for the rotating "train" effect
+@keyframes border-train {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animated_card {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 500px;
+  width: 350px;
+  background-color: #222;
+  border-radius: 12px;
+
+  &::before {
+    position: absolute;
+    height: 500px;
+    width: 350px;
+    background-color: tomato;
+  }
+}

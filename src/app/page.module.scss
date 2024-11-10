@@ -1,0 +1,208 @@
+.container {
+  display: flex;
+  height: 100vh;
+  overflow-y: hidden;
+  line-height: 1.625;
+  color: rgb(148, 163, 184);
+  padding-left: 6rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--snow-colors-neutral-1000);
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 48px;
+  }
+
+  h2,
+  h3 {
+    margin-top: 0.5rem;
+  }
+
+  h3 {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: sticky;
+    top: 0;
+    background-color: var(--background-color);
+    padding-bottom: 0.3rem;
+  }
+
+  p {
+    margin-top: 0.8rem;
+  }
+
+  .intro {
+    width: 40%;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 1rem;
+    gap: 42px;
+
+    nav {
+      margin-top: 4rem;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 24px;
+
+      a,
+      .clickable {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          color: var(--snow-colors-neutral-1000);
+          cursor: pointer;
+        }
+
+        h3 {
+          color: var(--snow-colors-grey-600);
+        }
+
+        // &:hover {
+        //   h3 {
+        //     color: var(--snow-colors-neutral-1000);
+        //   }
+        // }
+      }
+
+      &.sectionLinks {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+
+        .sectionLink {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          color: var(--snow-colors-grey-600);
+          .sectionLinkLine {
+            height: 1px;
+            margin-right: 1rem;
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 0.15s;
+            width: 2rem;
+            background-color: var(--snow-colors-grey-600);
+          }
+
+          &:hover {
+            .sectionLinkLine {
+              width: 4rem;
+              --tw-bg-opacity: 1;
+              background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+            }
+
+            h3 {
+              color: var(--snow-colors-neutral-1000);
+            }
+          }
+
+          &.active {
+            .sectionLinkLine {
+              width: 4rem;
+              --tw-bg-opacity: 1;
+              background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+            }
+
+            h3 {
+              color: var(--snow-colors-neutral-1000);
+            }
+          }
+        }
+      }
+    }
+
+    .srOnly {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  }
+
+  .detail {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 6rem;
+    font-size: 14px;
+    color: var(--snow-colors-grey-800);
+
+    .detailItem {
+      margin-bottom: 6rem;
+
+      h3 {
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        position: sticky;
+        top: 0;
+        background-color: var(--background-color);
+        padding-bottom: 0.3rem;
+        z-index: 10;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+    overflow-y: auto;
+    height: auto;
+
+    .intro {
+      width: 100%;
+
+      .sectionInLinePageNav {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    gap: 3rem;
+    h1 {
+      font-weight: 700;
+      font-size: 32px;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    .intro,
+    .detail {
+      padding-left: 0;
+      padding-right: 0;
+      padding: 0;
+    }
+  }
+}

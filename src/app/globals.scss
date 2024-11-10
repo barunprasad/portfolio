@@ -1,0 +1,53 @@
+:root {
+  --header-height: 3rem;
+  --header-padding-left: 54px;
+  --side-nav-width: 220px;
+  /* Default background for light theme (this can be overridden in theme-light) */
+  --background-color: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #f9fcfe 50%,
+    #f0f9ff 100%
+  );
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  // overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  background: var(--background-color);
+
+  color: var(--snow-colors-neutral-1000);
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100vh;
+}
+
+/* Light Theme */
+.theme-light {
+  --background-color: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #f9fcfe 50%,
+    #f0f9ff 100%
+  );
+
+  --background-color-header-nav: rgba(17, 25, 40, 0.05);
+}
+
+/* Dark Theme */
+.theme-dark {
+  --background-color: var(--snow-colors-primary-900);
+
+  --background-color-header-nav: rgba(17, 25, 40, 0.75);
+}
