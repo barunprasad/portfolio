@@ -2,7 +2,12 @@ import { Box, SnowThemeArgs } from '@arctic-kit/snow';
 import Image from 'next/image';
 import { styled } from '@pigment-css/react';
 
-const Container = styled(Box)(({ theme: { vars: theme } }: SnowThemeArgs) => ({
+const Container = styled.a(({ theme: { vars: theme } }: SnowThemeArgs) => ({
+  display: 'flex',
+  justifyContent: 'flex-start',
+  gap: 24,
+  width: '100%',
+  fontSize: 14,
   '.text': {
     color: theme.colors.grey[800],
     strong: {
@@ -43,17 +48,6 @@ const Container = styled(Box)(({ theme: { vars: theme } }: SnowThemeArgs) => ({
     },
   },
 
-  '.chip': {
-    display: 'flex',
-    alignItems: 'center',
-    color: theme.colors.secondary[200],
-    // background-color: var(--snow-colors-secondary-50);
-    backgroundColor: 'rgb(45 212 191 / 10%)',
-    borderRadius: 9999,
-    padding: '4px 12px',
-    fontSize: 12,
-  },
-
   '&:hover': {
     '.icon': {
       transform: 'rotate(-45deg)',
@@ -65,7 +59,6 @@ const Container = styled(Box)(({ theme: { vars: theme } }: SnowThemeArgs) => ({
     gap: 4,
     '.header': {
       textAlign: 'left',
-      color: theme.colors.neutral[1000],
     },
     '.imageContainer': {
       display: 'none',
@@ -84,23 +77,11 @@ export function Card({
   titleImgUrl?: string;
 }) {
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-start',
-        gap: 24,
-        width: '100%',
-        fontSize: 14,
-      }}
-      as="a"
-      href={href}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
+    <Container href={href} target="_blank" rel="noreferrer noopener">
       {titleNote && (
-        <Box sx={{ minWidth: 150 }} className={`text header`}>
+        <div sx={{ minWidth: 150 }} className={`text header`}>
           {titleNote}
-        </Box>
+        </div>
       )}
       {titleImgUrl && (
         <Box

@@ -23,17 +23,28 @@ export function ActiveSectionProvider({ children }: { children: ReactNode }) {
   const [activeSection, setActiveSection] = useState<string>('');
   const containerRef = useRef<HTMLElement>(null);
 
+  // useEffect(() => {
+  //   // Check for an initial hash in the URL on page load
+  //   const initialHash = window.location.hash.slice(1);
+  //   if (initialHash) {
+  //     setActiveSection(initialHash);
+  //     const element = document.getElementById(initialHash);
+  //     if (element) {
+  //       element.scrollIntoView({ behavior: 'smooth' });
+  //     }
+  //   }
+  // }, []);
+
   useEffect(() => {
-    // Check for an initial hash in the URL on page load
-    const initialHash = window.location.hash.slice(1);
-    if (initialHash) {
-      setActiveSection(initialHash);
-      const element = document.getElementById(initialHash);
+    if (activeSection) {
+      const element = document.getElementById(activeSection);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }, []);
+  }, [activeSection]);
+
+  console.log('activeSection: ', activeSection);
 
   return (
     <ActiveSectionContext.Provider

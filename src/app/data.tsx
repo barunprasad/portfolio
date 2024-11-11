@@ -14,7 +14,7 @@ export const Sections = [
     label: 'about',
     content: (
       <>
-        <p>
+        <p style={{ color: 'var(--snow-colors-neutral-1000)' }}>
           Frontend Engineering Leader with 17+ years in architecting scalable,
           mobile-first web applications and cross-platform mobile apps.
           Proficient in React ecosystem, frontend design systems, and backend

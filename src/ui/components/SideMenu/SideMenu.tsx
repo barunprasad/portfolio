@@ -5,8 +5,10 @@ import { motion, useCycle } from 'framer-motion';
 import { useDimensions } from './useDimensions';
 import { MenuToggle } from './MenuToggle';
 import { Navigation } from './Navigation';
+import { useActiveSection } from '@/ui/components/ActiveSection/ActiveSectionContext';
 
 import styles from './SideMenu.module.scss';
+
 const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 260px 40px)`,
@@ -29,6 +31,7 @@ const sidebar = {
 
 export const SideMenu = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
+  const { setActiveSection } = useActiveSection();
   const containerRef = useRef<HTMLElement>(null);
 
   const { height } = useDimensions(containerRef);
@@ -36,7 +39,7 @@ export const SideMenu = () => {
   const handleToggle = useCallback(
     (label: string) => {
       toggleOpen();
-      window.location.hash = label;
+      setActiveSection(label);
     },
     [toggleOpen],
   );

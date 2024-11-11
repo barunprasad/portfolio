@@ -1,4 +1,5 @@
 import { ProjectData } from '@/data/projects';
+import { CardChip } from '@/ui/components/Card';
 import { Card } from '@/ui/components/Card/Card';
 import { CardList } from '@/ui/components/Card/CardList';
 import { CardListItem } from '@/ui/components/Card/CardListItem';
@@ -30,9 +31,7 @@ export function ProjectSection() {
               }}
             >
               {project.skills.map((skill, index) => (
-                <div key={index} className={'chip'}>
-                  {skill}
-                </div>
+                <CardChip key={index}>{skill}</CardChip>
               ))}
             </Box>
           </Card>

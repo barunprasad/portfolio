@@ -1,8 +1,21 @@
-'use client';
-import { motion, useInView } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { useActiveSection } from '../ui/components/ActiveSection/ActiveSectionContext';
-import styles from './page.module.scss';
+import { styled } from '@pigment-css/react';
+
+const SectionContainer = styled.section({
+  marginBottom: '6rem',
+
+  h3: {
+    fontSize: '0.75rem',
+    lineHeight: '1rem',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    position: 'sticky',
+    top: 0,
+    backgroundColor: 'var(--background-color)',
+    paddingBottom: '0.3rem',
+    zIndex: 10,
+  },
+});
 
 export function Section({
   id,
@@ -13,22 +26,10 @@ export function Section({
   label: string;
   content: React.ReactNode;
 }) {
-  const ref = useRef(null);
-  const { setActiveSection, containerRef } = useActiveSection();
-  const inView = useInView(ref, { amount: 0.6, root: containerRef });
-
-  useEffect(() => {
-    if (inView) setActiveSection(label);
-  }, [inView, label, setActiveSection]);
-
   return (
-    <motion.section
-      id={id}
-      ref={ref}
-      className={`${styles.detailItem} scrollSection`}
-    >
+    <SectionContainer id={id} className={`scrollSection`}>
       <h3>{label.replace('-', ' ')}</h3>
       {content}
-    </motion.section>
+    </SectionContainer>
   );
 }

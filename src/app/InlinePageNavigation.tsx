@@ -5,10 +5,11 @@ import styles from './page.module.scss';
 import { useCallback } from 'react';
 
 export function InlinePageNavigation() {
-  const { activeSection } = useActiveSection();
+  const { activeSection, setActiveSection } = useActiveSection();
 
   const handleClick = useCallback((label: string) => {
-    window.location.hash = label;
+    // window.location.hash = label;
+    setActiveSection(label);
   }, []);
 
   return (
