@@ -3,12 +3,7 @@ import { ExperienceSection } from '@/ui/features/Sections/ExperienceSection';
 import { LearningSection } from '@/ui/features/Sections/LearningSection';
 import { ProjectSection } from '@/ui/features/Sections/ProjectSection';
 import { ViewResume } from '@/ui/features/ViewResume';
-import {
-  GitHubIcon,
-  LinkedInIcon,
-  MediumIcon,
-  // TwitterIcon
-} from '@/ui/icons';
+import { GitHubIcon, LinkedInIcon, MediumIcon, TwitterIcon } from '@/ui/icons';
 
 export const Sections = [
   {
@@ -65,9 +60,9 @@ export const SocialMediaLinks = [
     label: 'Medium',
     icon: <MediumIcon />,
   },
-  // {
-  //   href: 'https://x.com/iambarunprasad',
-  //   label: 'X',
-  //   icon: <TwitterIcon />,
-  // },
+  {
+    href: 'https://x.com/iambarunprasad',
+    label: 'X',
+    icon: <TwitterIcon />,
+  },
 ];
