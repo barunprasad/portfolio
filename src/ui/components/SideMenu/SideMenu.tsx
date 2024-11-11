@@ -41,7 +41,7 @@ export const SideMenu = () => {
       toggleOpen();
       setActiveSection(label);
     },
-    [toggleOpen],
+    [toggleOpen, setActiveSection],
   );
 
   return (

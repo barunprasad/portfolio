@@ -7,10 +7,13 @@ import { useCallback } from 'react';
 export function InlinePageNavigation() {
   const { activeSection, setActiveSection } = useActiveSection();
 
-  const handleClick = useCallback((label: string) => {
-    // window.location.hash = label;
-    setActiveSection(label);
-  }, []);
+  const handleClick = useCallback(
+    (label: string) => {
+      // window.location.hash = label;
+      setActiveSection(label);
+    },
+    [setActiveSection],
+  );
 
   return (
     <nav aria-label="page navigation" className={styles.sectionInLinePageNav}>

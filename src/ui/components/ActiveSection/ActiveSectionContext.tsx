@@ -44,8 +44,6 @@ export function ActiveSectionProvider({ children }: { children: ReactNode }) {
     }
   }, [activeSection]);
 
-  console.log('activeSection: ', activeSection);
-
   return (
     <ActiveSectionContext.Provider
       value={{ activeSection, setActiveSection, containerRef }}
