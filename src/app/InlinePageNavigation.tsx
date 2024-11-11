@@ -1,5 +1,5 @@
 'use client';
-import { Sections } from './data';
+import { ArticleSections } from './AllSections';
 import { useActiveSection } from '../ui/components/ActiveSection/ActiveSectionContext';
 import styles from './page.module.scss';
 import { useCallback } from 'react';
@@ -18,7 +18,7 @@ export function InlinePageNavigation() {
   return (
     <nav aria-label="page navigation" className={styles.sectionInLinePageNav}>
       <ul className={styles.sectionLinks}>
-        {Sections.map((item, index) => {
+        {ArticleSections.map((item, index) => {
           const isActive =
             activeSection === item.label || (!activeSection && index === 0);
           return (

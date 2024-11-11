@@ -1,11 +1,19 @@
-import { BlogSection } from '@/ui/features/Sections/BlogSection';
-import { ExperienceSection } from '@/ui/features/Sections/ExperienceSection';
-import { LearningSection } from '@/ui/features/Sections/LearningSection';
-import { ProjectSection } from '@/ui/features/Sections/ProjectSection';
+import { BlogData } from '@/data/blogs';
+import { ExperienceData } from '@/data/experience';
+import { LearningData } from '@/data/learning';
+import { ProjectData } from '@/data/projects';
+import { ArticleSection } from '@/ui/features/ArticleSection';
 import { ViewResume } from '@/ui/features/ViewResume';
 import { GitHubIcon, LinkedInIcon, MediumIcon, TwitterIcon } from '@/ui/icons';
+import { Stack } from '@arctic-kit/snow';
 
-export const Sections = [
+export const IntroSection = {
+  title: 'Barun Prasad',
+  subTitle: 'Frontend Evangelist',
+  description: 'Transforming ideas into creative solutions.',
+};
+
+export const ArticleSections = [
   {
     label: 'about',
     content: (
@@ -25,22 +33,25 @@ export const Sections = [
     label: 'experience',
     content: (
       <>
-        <ExperienceSection />
-        <ViewResume />
+        <ArticleSection articles={ExperienceData} />
+        <Stack direction="horizontal" inline spacing={2}>
+          <ViewResume label="View Full Resume" href="/resume.pdf" />
+          <ViewResume label="View Short Resume" href="/resume_short.pdf" />
+        </Stack>
       </>
     ),
   },
   {
     label: 'projects',
-    content: <ProjectSection />,
+    content: <ArticleSection articles={ProjectData} />,
   },
   {
     label: 'blogs',
-    content: <BlogSection />,
+    content: <ArticleSection articles={BlogData} />,
   },
   {
     label: 'learnings',
-    content: <LearningSection />,
+    content: <ArticleSection articles={LearningData} />,
   },
 ];
 

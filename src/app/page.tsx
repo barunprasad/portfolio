@@ -1,4 +1,4 @@
-import { Sections, SocialMediaLinks } from './data';
+import { ArticleSections, SocialMediaLinks, IntroSection } from './AllSections';
 import { InlinePageNavigation } from './InlinePageNavigation';
 import { Section } from './Section';
 import styles from './page.module.scss';
@@ -12,9 +12,9 @@ export default function Index() {
       <main className={styles.container}>
         <section className={styles.intro}>
           <div>
-            <h1>Barun Prasad</h1>
-            <h2>Frontend Evangelist</h2>
-            <h3>Transforming ideas into creative solutions.</h3>
+            <h1>{IntroSection.title}</h1>
+            <h2>{IntroSection.subTitle}</h2>
+            <h3>{IntroSection.description}</h3>
             <InlinePageNavigation />
           </div>
 
@@ -37,7 +37,7 @@ export default function Index() {
         </section>
 
         <ScrollSection className={styles.detail}>
-          {Sections.map((item) => (
+          {ArticleSections.map((item) => (
             <Section
               key={item.label}
               id={item.label}

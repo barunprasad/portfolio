@@ -1,12 +1,12 @@
-import { PersonalProjectType } from '@/types/PersonalProjectType';
+import { ArticleType } from '@/types/ArticleType';
 
-export const ProjectData: PersonalProjectType[] = [
+export const ProjectData: ArticleType[] = [
   {
     title: 'Arctic Design System',
     url: 'https://arctic-design.netlify.app',
-    content: `Arctic Design is an innovative design system that integrates cutting-edge technologies and design principles to deliver a cohesive and flexible experience. With an emphasis on performance and interactivity, Arctic Design leverages zero-runtime CSS, server-side rendering compatibility, and advanced animations to create engaging user interfaces.`,
-    imgUrl: '/arcticdesign1.png',
-    skills: [
+    description: `Arctic Design is an innovative design system that integrates cutting-edge technologies and design principles to deliver a cohesive and flexible experience. With an emphasis on performance and interactivity, Arctic Design leverages zero-runtime CSS, server-side rendering compatibility, and advanced animations to create engaging user interfaces.`,
+    imageUrl: '/arcticdesign1.png',
+    tags: [
       'React',
       'NX Workspace',
       'Storybook',
@@ -18,9 +18,9 @@ export const ProjectData: PersonalProjectType[] = [
   {
     title: 'PDF Studio',
     url: 'https://pdf-studio.netlify.app',
-    content: `PDF Studio application using Next.js with the App Router, set up within an NX Workspace. It also leverages the @arctic-kit/snow component library to streamline the UI development`,
-    imgUrl: '/images/pdf_studio.webp',
-    skills: [
+    description: `PDF Studio application using Next.js with the App Router, set up within an NX Workspace. It also leverages the @arctic-kit/snow component library to streamline the UI development`,
+    imageUrl: '/images/pdf_studio.webp',
+    tags: [
       'React',
       'NX Workspace',
       'TypeScript',
@@ -32,9 +32,9 @@ export const ProjectData: PersonalProjectType[] = [
   {
     title: 'Portfolio',
     url: 'https://www.barunprasad.com',
-    content: `The current portfolio project built using NextJs and deployed on vercel.`,
-    imgUrl: '/images/portfolio.png',
-    skills: [
+    description: `The current portfolio project built using NextJs and deployed on vercel.`,
+    imageUrl: '/images/portfolio.png',
+    tags: [
       'React',
       'Next.js',
       'TypeScript',

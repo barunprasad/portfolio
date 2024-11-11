@@ -30,16 +30,16 @@ const ViewResumeContainer = styled.a(
   }),
 );
 
-export function ViewResume() {
+export function ViewResume({ href, label }: { href: string; label: string }) {
   return (
     <ViewResumeContainer
-      href="https://1drv.ms/w/c/d285ff9f53836da6/EXQGlVPrSupJiQdVF48hLOgBB62xlfBDzOdXXWEwPjLOKQ?e=CPObbG"
-      aria-label="View Resume"
+      href={href}
+      aria-label={label}
       target="_blank"
       rel="noreferrer noopener"
     >
       <strong>
-        <span>View Full Resume</span>
+        <span>{label}</span>
         <ArrowRightIcon className="icon" />
       </strong>
     </ViewResumeContainer>
