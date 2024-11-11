@@ -24,10 +24,25 @@ export const ProjectData: PersonalProjectType[] = [
     skills: [
       'React',
       'NX Workspace',
-      'Storybook',
       'TypeScript',
       'PigmentCss',
       'framer-motion',
+      'Arctic-Design',
+    ],
+  },
+  {
+    title: 'Portfolio',
+    url: 'https://www.barunprasad.com',
+    content: `The current portfolio project built using NextJs and deployed on vercel.`,
+    imgUrl: '/portfolio.png',
+    skills: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'PigmentCss',
+      'framer-motion',
+      'Arctic-Design',
+      'Vercel',
     ],
   },
 ];

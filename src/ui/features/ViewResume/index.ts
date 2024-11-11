@@ -1,0 +1,1 @@
+export { ViewResume } from './ViewResume';

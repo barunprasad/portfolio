@@ -2,6 +2,7 @@ import { BlogSection } from '@/ui/features/Sections/BlogSection';
 import { ExperienceSection } from '@/ui/features/Sections/ExperienceSection';
 import { LearningSection } from '@/ui/features/Sections/LearningSection';
 import { ProjectSection } from '@/ui/features/Sections/ProjectSection';
+import { ViewResume } from '@/ui/features/ViewResume';
 import {
   GitHubIcon,
   LinkedInIcon,
@@ -30,6 +31,7 @@ export const Sections = [
     content: (
       <>
         <ExperienceSection />
+        <ViewResume />
       </>
     ),
   },
