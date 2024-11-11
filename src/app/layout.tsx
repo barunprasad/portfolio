@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.barunprasad.com'),
   title: 'Barun Prasad - Frontend Evangelist',
   description:
     'Explore the portfolio of Barun Prasad, a seasoned Frontend Evangelist with expertise in UI strategy, React, and modern web development. Discover insights into accessible, scalable, and high-performance frontend solutions.',
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
     title: 'Barun Prasad - Frontend Evangelist',
     description:
       'Explore the portfolio of Barun Prasad, a seasoned Frontend Evangelist with expertise in UI strategy, React, and modern web development.',
-    images: ['https://x.com/iambarunprasad/photo'],
+    images: ['/images/profile_image.jpg'],
   },
   robots: 'index, follow',
   authors: {
