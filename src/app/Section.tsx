@@ -20,16 +20,16 @@ const SectionContainer = styled.section({
 export function Section({
   id,
   label,
-  content,
+  children,
 }: {
   id: string;
   label: string;
-  content: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
     <SectionContainer id={id} className={`scrollSection`}>
       <h3>{label.replace('-', ' ')}</h3>
-      {content}
+      {children}
     </SectionContainer>
   );
 }

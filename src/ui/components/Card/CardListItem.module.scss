@@ -21,7 +21,7 @@
   padding: 12px;
   border-radius: 6px;
   // background-color: var(--snow-colors-grey-50);
-  color: var(--snow-colors-neutral-0);
+  color: var(--snow-colors-neutral-1000);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,21 +30,23 @@
   transition: transform 0.3s ease;
   border: 1px solid transparent; // Default transparent border
 
-  &:hover {
-    --gradient-border: conic-gradient(
-      from var(--border-angle),
-      transparent 25%,
-      var(--snow-colors-info-main),
-      var(--snow-colors-error-main),
-      transparent
-    );
+  &.clickable {
+    &:hover {
+      --gradient-border: conic-gradient(
+        from var(--border-angle),
+        transparent 25%,
+        var(--snow-colors-info-main),
+        var(--snow-colors-error-main),
+        transparent
+      );
 
-    background-color: #232b3e;
-    background:
-      var(--main-bg) padding-box,
-      var(--gradient-border) border-box,
-      var(--main-bg) border-box;
-    animation: rotate-border 3s linear infinite;
+      background-color: #232b3e;
+      background:
+        var(--main-bg) padding-box,
+        var(--gradient-border) border-box,
+        var(--main-bg) border-box;
+      animation: rotate-border 3s linear infinite;
+    }
   }
 
   .icon {

@@ -5,7 +5,7 @@ export const ProjectData: ArticleType[] = [
     title: 'Arctic Design System',
     url: 'https://arctic-design.netlify.app',
     description: `Arctic Design is an innovative design system that integrates cutting-edge technologies and design principles to deliver a cohesive and flexible experience. With an emphasis on performance and interactivity, Arctic Design leverages zero-runtime CSS, server-side rendering compatibility, and advanced animations to create engaging user interfaces.`,
-    imageUrl: '/arcticdesign1.png',
+    imageUrl: '/images/arcticdesign.png',
     tags: [
       'React',
       'NX Workspace',

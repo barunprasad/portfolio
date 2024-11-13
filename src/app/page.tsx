@@ -1,10 +1,11 @@
-import { ArticleSections, SocialMediaLinks, IntroSection } from './AllSections';
+import { SocialMediaLinks } from './AllSections';
 import { InlinePageNavigation } from './InlinePageNavigation';
-import { Section } from './Section';
 import styles from './page.module.scss';
 import { SideMenu } from '@/ui/components/SideMenu/SideMenu';
 import { ActiveSectionProvider } from '@/ui/components/ActiveSection/ActiveSectionContext';
-import ScrollSection from '@/ui/components/ActiveSection/ScrollSection';
+import { IntroSectionData } from '@/data';
+import { DetailSection } from './DetailSection';
+
 export default function Index() {
   return (
     <ActiveSectionProvider>
@@ -12,9 +13,9 @@ export default function Index() {
       <main className={styles.container}>
         <section className={styles.intro}>
           <div>
-            <h1>{IntroSection.title}</h1>
-            <h2>{IntroSection.subTitle}</h2>
-            <h3>{IntroSection.description}</h3>
+            <h1>{IntroSectionData.title}</h1>
+            <h2>{IntroSectionData.subTitle}</h2>
+            <h3>{IntroSectionData.description}</h3>
             <InlinePageNavigation />
           </div>
 
@@ -36,16 +37,7 @@ export default function Index() {
           </ul>
         </section>
 
-        <ScrollSection className={styles.detail}>
-          {ArticleSections.map((item) => (
-            <Section
-              key={item.label}
-              id={item.label}
-              label={item.label}
-              content={item.content}
-            />
-          ))}
-        </ScrollSection>
+        <DetailSection />
       </main>
     </ActiveSectionProvider>
   );

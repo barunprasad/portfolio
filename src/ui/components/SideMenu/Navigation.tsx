@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { MenuItem } from './MenuItem';
-import { ArticleSections } from '@/app/AllSections';
+import { ArticleSectionData } from '@/data';
 
 const variants = {
   open: {
@@ -17,7 +17,7 @@ export const Navigation = ({
   onToggle: (label: string) => void;
 }) => (
   <motion.ul variants={variants}>
-    {ArticleSections.map((item, index) => (
+    {ArticleSectionData.map((item, index) => (
       <MenuItem
         key={index}
         label={item.label}

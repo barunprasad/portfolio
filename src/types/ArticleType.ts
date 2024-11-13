@@ -4,7 +4,7 @@ type OrganizationType = {
 };
 export type ArticleType = {
   title?: string;
-  url: string;
+  url?: string;
   imageUrl?: string;
   tags?: string[];
   duration?: string;

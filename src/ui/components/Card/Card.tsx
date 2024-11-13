@@ -71,13 +71,19 @@ export function Card({
   children,
   titleImgUrl,
 }: {
-  href: string;
+  href?: string;
   children: React.ReactNode;
   titleNote?: string;
   titleImgUrl?: string;
 }) {
+  const asElement = href ? 'a' : 'div';
   return (
-    <Container href={href} target="_blank" rel="noreferrer noopener">
+    <Container
+      as={asElement}
+      href={href}
+      target={asElement === 'a' ? '_blank' : ''}
+      rel={asElement === 'a' ? 'noreferrer noopener' : ''}
+    >
       {titleNote && (
         <div sx={{ minWidth: 150 }} className={`text header`}>
           {titleNote}

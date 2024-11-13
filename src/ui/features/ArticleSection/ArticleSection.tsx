@@ -7,20 +7,30 @@ export function ArticleSection({ articles }: { articles: ArticleType[] }) {
   return (
     <CardList>
       {articles.map((article, index) => {
+        const hasTitleToShow = !!(
+          article.title ||
+          article?.roles?.length ||
+          article.location ||
+          article.organization?.name
+        );
         const title =
           article.title ||
           `${article?.roles?.[0]} | ${article.location} | ${article.organization?.name}`;
+        const hasLink = !!(article.organization?.url || article.url);
         return (
-          <CardListItem key={index}>
+          <CardListItem key={index} clickable={hasLink}>
             <Card
               href={article.organization?.url || article.url}
               titleNote={article.duration}
               titleImgUrl={article.imageUrl}
             >
-              <strong>
-                {title}
-                <ArrowRightIcon className="icon" />
-              </strong>
+              {hasTitleToShow && (
+                <strong>
+                  {title}
+                  <ArrowRightIcon className="icon" />
+                </strong>
+              )}
+
               {article.roles && article.roles.length > 1 && (
                 <span>
                   {article.roles
