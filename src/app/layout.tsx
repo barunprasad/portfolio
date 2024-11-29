@@ -4,7 +4,6 @@ import './globals.scss';
 import '@pigment-css/react/styles.css';
 import '@arctic-kit/snow/style.css';
 import { siteMetadata } from './siteMetadata';
-import AnalyticsProvider from '@/ui/components/AnalyticsProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,9 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="theme-dark">
-      <body className={`${inter.className} antialiased`}>
-        <AnalyticsProvider>{children}</AnalyticsProvider>
-      </body>
+      <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   );
 }
