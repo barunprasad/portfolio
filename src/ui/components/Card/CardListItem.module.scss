@@ -18,7 +18,7 @@
 
   width: 100%;
   // max-width: 320px;
-  padding: 12px;
+  // padding: 8px;
   border-radius: 6px;
   // background-color: var(--snow-colors-grey-50);
   color: var(--snow-colors-neutral-1000);
@@ -31,6 +31,9 @@
   border: 1px solid transparent; // Default transparent border
 
   &.clickable {
+    padding: 16px;
+    border: 1px solid #ffffff0d;
+    background-color: #ffffff08;
     &:hover {
       --gradient-border: conic-gradient(
         from var(--border-angle),
