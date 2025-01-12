@@ -3,7 +3,7 @@ import { ArticleType } from '@/types/ArticleType';
 export const ExperienceData: ArticleType[] = [
   {
     duration: 'Sep 2023 - Present',
-    roles: ['Senior Manager, UI Strategy'],
+    roles: ['UI Architect'],
     location: 'Bengaluru',
     organization: {
       name: 'Moxe Health',
