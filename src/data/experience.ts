@@ -2,7 +2,26 @@ import { ArticleType } from '@/types/ArticleType';
 
 export const ExperienceData: ArticleType[] = [
   {
-    duration: 'Sep 2023 - Present',
+    duration: 'Jun 2025 - Present',
+    roles: ['Director of Technology'],
+    location: 'Bengaluru',
+    organization: {
+      name: 'Code and Theory',
+      url: 'https://www.codeandtheory.com',
+    },
+    url: '',
+    tags: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'Design Systems',
+      'Micro-frontends',
+    ],
+    description:
+      'Leading frontend technology initiatives at Code and Theory, focusing on modernizing UI architecture, design system adoption, and micro-frontend strategies across enterprise projects.',
+  },
+  {
+    duration: 'Sep 2023 - Apr 2025',
     roles: ['UI Architect'],
     location: 'Bengaluru',
     organization: {

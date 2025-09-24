@@ -20,10 +20,10 @@ export const ArticleSectionData: SectionType[] = [
     label: 'experience',
     content: ExperienceData,
     footerLinks: [
-      {
-        href: '/resume.pdf',
-        label: 'View Full Resume',
-      },
+      // {
+      //   href: '/resume.pdf',
+      //   label: 'View Full Resume',
+      // },
       {
         href: '/resume_short.pdf',
         label: 'View Short Resume',
