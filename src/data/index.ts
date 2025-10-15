@@ -24,10 +24,10 @@ export const ArticleSectionData: SectionType[] = [
       //   href: '/resume.pdf',
       //   label: 'View Full Resume',
       // },
-      {
-        href: '/resume_short.pdf',
-        label: 'View Short Resume',
-      },
+      // {
+      //   href: '/resume_short.pdf',
+      //   label: 'View Short Resume',
+      // },
     ],
   },
   {
