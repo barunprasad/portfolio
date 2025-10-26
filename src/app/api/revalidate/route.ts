@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   if (!secret || secret !== process.env.REVALIDATE_SECRET) {
     return NextResponse.json(
       { message: 'Invalid or missing authentication token' },
-      { status: 401 }
+      { status: 401 },
     );
   }
 
@@ -31,28 +31,29 @@ export async function POST(request: NextRequest) {
       {
         revalidated: true,
         message: 'Successfully revalidated home page',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     return NextResponse.json(
       {
         message: 'Error revalidating',
-        error: error instanceof Error ? error.message : 'Unknown error'
+        error: error instanceof Error ? error.message : 'Unknown error',
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 // Optional: Handle GET requests for testing
-export async function GET(request: NextRequest) {
+export async function GET() {
   return NextResponse.json(
     {
       message: 'This endpoint only accepts POST requests from Hygraph webhooks',
-      usage: 'POST /api/revalidate with header: X-Revalidate-Secret: YOUR_SECRET'
+      usage:
+        'POST /api/revalidate with header: X-Revalidate-Secret: YOUR_SECRET',
     },
-    { status: 405 }
+    { status: 405 },
   );
 }

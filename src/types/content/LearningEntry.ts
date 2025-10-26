@@ -7,4 +7,7 @@ export type LearningEntry = {
   imageUrl?: string;
   date?: string;
   organization?: Organization;
+  // Optional url field for compatibility with ArticleSection component
+  // In Hygraph provider, we map certificateUrl to url for consistency
+  url?: string;
 };

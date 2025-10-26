@@ -157,10 +157,12 @@ export class HygraphDataProvider implements DataProvider {
             break;
           case 'learnings':
             // Map certificateUrl to url for ArticleSection compatibility
-            content = (section.learningEntries || []).map((entry) => ({
-              ...entry,
-              url: entry.certificateUrl,
-            })) as any;
+            content = (section.learningEntries || []).map(
+              (entry): LearningEntry => ({
+                ...entry,
+                url: entry.certificateUrl,
+              }),
+            );
             break;
         }
 
