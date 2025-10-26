@@ -1,0 +1,49 @@
+fragment ArticleFields on Article {
+  id
+  title
+  url
+  imageUrl
+  tags
+  duration
+  roles
+  location
+  date
+  description
+  organization {
+    name
+    url
+  }
+  clientOrganization {
+    name
+    url
+  }
+}
+
+query GetAllSections {
+  sections {
+    id
+    label
+    articles {
+      ...ArticleFields
+    }
+  }
+}
+
+query GetIntroSection {
+  introSections(first: 1) {
+    id
+    title
+    subTitle
+    description
+  }
+}
+
+query GetSocialLinks {
+  socialLinks(orderBy: order_ASC) {
+    id
+    platform
+    url
+    icon
+    order
+  }
+}

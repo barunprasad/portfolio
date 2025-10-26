@@ -1,4 +1,4 @@
-import { SectionType } from '@/types/SectionType';
+import { Section } from '@/types/content';
 import { ExperienceData } from './experience';
 import { AboutData } from './about';
 import { ProjectData } from './projects';
@@ -11,7 +11,8 @@ export const IntroSectionData = {
   description: 'Transforming ideas into creative solutions.',
 };
 
-export const ArticleSectionData: SectionType[] = [
+// Type-safe sections with discriminated unions
+export const ArticleSectionData: Section[] = [
   {
     label: 'about',
     content: AboutData,

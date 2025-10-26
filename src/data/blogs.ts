@@ -1,6 +1,6 @@
-import { ArticleType } from '@/types/ArticleType';
+import { BlogEntry } from '@/types/content';
 
-export const BlogData: ArticleType[] = [
+export const BlogData: BlogEntry[] = [
   {
     title:
       'Building a Cohesive Brand: The Power and Practice of Design Systems',

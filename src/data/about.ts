@@ -1,6 +1,6 @@
-import { ArticleType } from '@/types/ArticleType';
+import { AboutContent } from '@/types/content';
 
-export const AboutData: ArticleType[] = [
+export const AboutData: AboutContent[] = [
   {
     description: `Frontend Engineering Leader with 18+ years in architecting scalable,
           mobile-first web applications and cross-platform mobile apps.

@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: true,
   },
-  output: 'export',
+  // Removed 'output: export' to enable ISR
 };
 
 const configWithPigment = withPigment(

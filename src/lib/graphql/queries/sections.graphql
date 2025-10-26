@@ -1,0 +1,102 @@
+# New Type-Safe GraphQL Queries for Hygraph
+
+# Fragment for About Content
+fragment AboutContentFields on AboutContent {
+  description
+}
+
+# Fragment for Experience Entry
+fragment ExperienceEntryFields on ExperienceEntry {
+  duration
+  roles
+  location
+  tags
+  description
+  organization {
+    id
+    name
+    url
+  }
+  clientOrganization {
+    id
+    name
+    url
+  }
+}
+
+# Fragment for Project Entry
+fragment ProjectEntryFields on ProjectEntry {
+  title
+  url
+  description
+  imageUrl
+  tags
+}
+
+# Fragment for Blog Entry
+fragment BlogEntryFields on BlogEntry {
+  title
+  url
+  description
+  imageUrl
+  date
+}
+
+# Fragment for Learning Entry
+fragment LearningEntryFields on LearningEntry {
+  title
+  certificateUrl
+  description
+  imageUrl
+  date
+  organization {
+    id
+    name
+    url
+  }
+}
+
+# Main query to get all sections with typed content
+query GetAllSections {
+  sections(orderBy: order_ASC) {
+    id
+    order
+    label
+    aboutContents {
+      ...AboutContentFields
+    }
+    experienceEntries {
+      ...ExperienceEntryFields
+    }
+    projectEntries {
+      ...ProjectEntryFields
+    }
+    blogEntries {
+      ...BlogEntryFields
+    }
+    learningEntries {
+      ...LearningEntryFields
+    }
+  }
+}
+
+# Query for intro section
+query GetIntroSection {
+  introSections(first: 1) {
+    id
+    title
+    subTitle
+    description
+  }
+}
+
+# Query for social links
+query GetSocialLinks {
+  socialLinks(orderBy: order_ASC) {
+    id
+    platform
+    url
+    icon
+    order
+  }
+}

@@ -1,15 +1,12 @@
-import { ArticleType } from '@/types/ArticleType';
+import { ExperienceEntry } from '@/types/content';
+import { ORGANIZATIONS } from './organizations';
 
-export const ExperienceData: ArticleType[] = [
+export const ExperienceData: ExperienceEntry[] = [
   {
     duration: 'Jun 2025 - Present',
     roles: ['Director of Technology'],
     location: 'Bengaluru',
-    organization: {
-      name: 'Code and Theory',
-      url: 'https://www.codeandtheory.com',
-    },
-    url: '',
+    organization: ORGANIZATIONS.CODE_AND_THEORY,
     tags: [
       'React',
       'Next.js',
@@ -24,11 +21,7 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Sep 2023 - Apr 2025',
     roles: ['UI Architect'],
     location: 'Bengaluru',
-    organization: {
-      name: 'Moxe Health',
-      url: 'https://moxehealth.com',
-    },
-    url: '',
+    organization: ORGANIZATIONS.MOXE_HEALTH,
     tags: [
       'React',
       'Vite',
@@ -45,11 +38,7 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Sep 2021 - Sep 2023',
     roles: ['Staff Engineer'],
     location: 'Bengaluru',
-    organization: {
-      name: 'Walmart Global Tech',
-      url: 'https://tech.walmart.com',
-    },
-    url: '',
+    organization: ORGANIZATIONS.WALMART_GLOBAL_TECH,
     tags: [
       'React',
       'Redux',
@@ -66,11 +55,7 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Jun 2019 - Aug 2021',
     roles: ['Principal Engineer'],
     location: 'Bengaluru',
-    url: '',
-    organization: {
-      name: 'HealthEdge Technologies',
-      url: 'https://www.healthedge.com',
-    },
+    organization: ORGANIZATIONS.HEALTHEDGE,
     tags: ['React.js', 'React Native', 'Redux', 'LoopBack'],
     description:
       'Architected frontend solutions for HealthEdge applications, leading the Configuration Integrity and Promotion project, enabling business analysts to modify configurations independently. Converted legacy services to RESTful APIs and developed web and native apps for improved user accessibility.',
@@ -79,11 +64,7 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Oct 2015 - May 2019',
     roles: ['Senior Engineer'],
     location: 'Burlington, MA',
-    url: '',
-    organization: {
-      name: 'HealthEdge',
-      url: 'https://www.healthedge.com',
-    },
+    organization: ORGANIZATIONS.HEALTHEDGE,
     tags: [
       'React.js',
       'Redux',
@@ -100,15 +81,8 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Dec 2014 - Oct 2015',
     roles: ['Senior Solution Engineer'],
     location: 'Camp Hill, PA',
-    url: '',
-    organization: {
-      name: 'Deloitte Consulting LLC',
-      url: 'https://www2.deloitte.com',
-    },
-    clientOrganization: {
-      name: 'Pennsylvania Department of Human Services',
-      url: 'https://www.pa.gov',
-    },
+    organization: ORGANIZATIONS.DELOITTE,
+    clientOrganization: ORGANIZATIONS.PA_DHS,
     tags: [
       'ASP.NET',
       'AngularJS',
@@ -118,22 +92,14 @@ export const ExperienceData: ArticleType[] = [
       'CSS3',
       'JavaScript',
     ],
-    description:
-      'Managed release planning and web development for Home and Community Services Information System (HCSIS), supporting Pennsylvania’s vulnerable citizens.',
+    description: `Managed release planning and web development for Home and Community Services Information System (HCSIS), supporting Pennsylvania's vulnerable citizens.`,
   },
   {
     duration: 'Feb 2013 - Dec 2014',
     roles: ['Onsite Coordinator', 'Project Lead'],
     location: 'Princeton, NJ',
-    organization: {
-      name: 'L&T Infotech',
-      url: 'https://www.ltimindtree.com',
-    },
-    clientOrganization: {
-      name: 'MunichRe America',
-      url: 'https://www.munichre.com',
-    },
-    url: '',
+    organization: ORGANIZATIONS.LT_INFOTECH,
+    clientOrganization: ORGANIZATIONS.MUNICHRE,
     tags: [
       'C#.NET',
       'ASP.NET MVC',
@@ -151,15 +117,8 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Sep 2011 - Jan 2013',
     roles: ['Technical Lead'],
     location: 'Hartford, CT',
-    organization: {
-      name: 'L&T Infotech',
-      url: 'https://www.ltimindtree.com',
-    },
-    url: '',
-    clientOrganization: {
-      name: 'Travelers Insurance',
-      url: 'https://www.travelers.com',
-    },
+    organization: ORGANIZATIONS.LT_INFOTECH,
+    clientOrganization: ORGANIZATIONS.TRAVELERS,
     tags: ['ASP.NET MVC', 'nUnit', 'JavaScript', 'SQL Server', 'Oracle'],
     description:
       'Led development for Quote Prefill and eDelivery Preference Service projects at Travelers Insurance, improving policyholder services.',
@@ -168,15 +127,8 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Sep 2009 - Aug 2011',
     roles: ['Onsite Coordinator'],
     location: 'Hartford, CT',
-    organization: {
-      name: 'L&T Infotech',
-      url: 'https://www.ltimindtree.com',
-    },
-    url: '',
-    clientOrganization: {
-      name: 'Insurity',
-      url: 'https://insurity.com',
-    },
+    organization: ORGANIZATIONS.LT_INFOTECH,
+    clientOrganization: ORGANIZATIONS.INSURITY,
     tags: ['C#.NET', 'ASP.NET', 'nUnit', 'MS SQL Server'],
     description:
       'Coordinated offshore activities and customized "Policy Decisions/NGA" for Insurity, ensuring compliance with ISO regulations.',
@@ -185,15 +137,8 @@ export const ExperienceData: ArticleType[] = [
     duration: 'Jul 2007 - Aug 2009',
     roles: ['Sr. Software Engineer', 'Software Engineer'],
     location: 'Mumbai',
-    organization: {
-      name: 'L&T Infotech',
-      url: 'https://www.ltimindtree.com',
-    },
-    url: '',
-    clientOrganization: {
-      name: 'MunichRe America',
-      url: 'https://www.munichre.com',
-    },
+    organization: ORGANIZATIONS.LT_INFOTECH,
+    clientOrganization: ORGANIZATIONS.MUNICHRE,
     tags: [
       'ASP.NET 2.0',
       'C#.NET 2.0',

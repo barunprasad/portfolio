@@ -1,13 +1,25 @@
-import { SocialMediaLinks } from './AllSections';
 import { InlinePageNavigation } from './InlinePageNavigation';
 import styles from './page.module.scss';
 import { SideMenu } from '@/ui/components/SideMenu/SideMenu';
 import { ActiveSectionProvider } from '@/ui/components/ActiveSection/ActiveSectionContext';
-import { IntroSectionData } from '@/data';
 import { DetailSection } from './DetailSection';
 import ClientLayout from '@/ui/components/ClientLayout';
+import {
+  getIntroSection,
+  getSocialLinks,
+  getSections,
+} from '@/lib/data-provider';
+import { getIconComponent } from '@/lib/utils/icon-mapper';
 
-export default function Index() {
+// ISR: Revalidate this page every hour (3600 seconds)
+// On-demand revalidation via webhook will trigger updates immediately
+export const revalidate = 3600;
+
+export default async function Index() {
+  const introData = await getIntroSection();
+  const socialLinks = await getSocialLinks();
+  const sections = await getSections();
+
   return (
     <ClientLayout>
       <ActiveSectionProvider>
@@ -15,31 +27,31 @@ export default function Index() {
         <main className={styles.container}>
           <section className={styles.intro}>
             <div>
-              <h1>{IntroSectionData.title}</h1>
-              <h2>{IntroSectionData.subTitle}</h2>
-              <h3>{IntroSectionData.description}</h3>
+              <h1>{introData.title}</h1>
+              <h2>{introData.subTitle}</h2>
+              <h3>{introData.description}</h3>
               <InlinePageNavigation />
             </div>
 
             <ul aria-label="Social Media" className={styles.socialMediaLinks}>
-              {SocialMediaLinks.map(({ href, label, icon }) => (
-                <li key={label}>
+              {socialLinks.map((link) => (
+                <li key={link.platform}>
                   <a
-                    href={href}
+                    href={link.url}
                     target="_blank"
                     rel="noreferrer noopener"
-                    aria-label={`${label} (opens in a new tab)`}
-                    title={label}
+                    aria-label={`${link.platform} (opens in a new tab)`}
+                    title={link.platform}
                   >
-                    <span className={styles.srOnly}>{label}</span>
-                    {icon}
+                    <span className={styles.srOnly}>{link.platform}</span>
+                    {getIconComponent(link.icon)}
                   </a>
                 </li>
               ))}
             </ul>
           </section>
 
-          <DetailSection />
+          <DetailSection sections={sections} />
         </main>
       </ActiveSectionProvider>
     </ClientLayout>

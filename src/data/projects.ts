@@ -1,6 +1,6 @@
-import { ArticleType } from '@/types/ArticleType';
+import { ProjectEntry } from '@/types/content';
 
-export const ProjectData: ArticleType[] = [
+export const ProjectData: ProjectEntry[] = [
   {
     title: 'Arctic Design Kit',
     url: 'https://www.arctic-kit.com',
