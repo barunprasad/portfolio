@@ -66,12 +66,14 @@
     }
   }
 
-  /* Reveal targets start hidden ONLY when JS is active and motion is allowed,
-     so GSAP can animate them in. Crawlers / no-JS / reduced-motion see them. */
-  @media (prefers-reduced-motion: no-preference) {
-    html.js [data-animate],
-    html.js [data-hero-fade],
-    html.js [data-split] {
+  /* Reveal targets start hidden ONLY when scripting is enabled and motion is
+     allowed, so GSAP can animate them in. Uses the `scripting` media feature
+     (no class on <html>, so no hydration mismatch). Crawlers / no-JS /
+     reduced-motion / unsupported browsers see everything. */
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    [data-animate],
+    [data-hero-fade],
+    [data-split] {
       opacity: 0;
     }
   }

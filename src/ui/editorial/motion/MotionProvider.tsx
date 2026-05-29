@@ -9,9 +9,9 @@ import Lenis from 'lenis';
 /**
  * Sets up smooth scroll (Lenis) + scroll-driven reveals (GSAP) as progressive
  * enhancement. Renders nothing. All content is already in the DOM and visible
- * unless JS runs AND the user allows motion — the reveal-hiding CSS is gated on
- * `html.js` + `prefers-reduced-motion: no-preference`, so SEO/no-JS/reduced-motion
- * users always see everything.
+ * unless scripting is enabled AND the user allows motion — the reveal-hiding CSS
+ * is gated on `(scripting: enabled) and (prefers-reduced-motion: no-preference)`,
+ * so SEO/no-JS/reduced-motion users always see everything.
  */
 export function MotionProvider() {
   useEffect(() => {

@@ -23,13 +23,6 @@ export default function RootLayout({
       className={`${inter.variable} ${generalSans.variable} ${GeistMono.variable}`}
     >
       <body className="font-sans antialiased">
-        {/* Flag JS as early as possible so reveal-hiding CSS applies pre-paint
-            (no flash of hidden→shown). No-JS users never get the hiding rules. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
         {children}
         <div className="grain" aria-hidden="true" />
       </body>
