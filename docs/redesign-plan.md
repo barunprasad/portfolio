@@ -1,8 +1,8 @@
 # Portfolio Redesign — Editorial Minimal (2026)
 
 **Branch:** `redesign/editorial-minimal`
-**Status:** Plan (not yet implemented)
-**Last updated:** 2026-05-29
+**Status:** Phase 1 ✅ · Phase 2 ✅ · Phase 3 (motion) and Phase 4 (polish) pending
+**Last updated:** 2026-05-30
 
 ---
 
