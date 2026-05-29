@@ -5,6 +5,8 @@ import {
 } from '@/lib/data-provider';
 import ClientLayout from '@/ui/components/ClientLayout';
 import { Hero } from '@/ui/editorial/Hero';
+import { StatsBand } from '@/ui/editorial/StatsBand';
+import { Marquee } from '@/ui/editorial/Marquee';
 import { Sections } from '@/ui/editorial/Sections';
 import { Footer } from '@/ui/editorial/Footer';
 import { PersonJsonLd } from '@/ui/editorial/PersonJsonLd';
@@ -26,9 +28,11 @@ export default async function Index() {
     <ClientLayout>
       <PersonJsonLd intro={intro} socialLinks={socialLinks} />
       <MotionProvider />
-      <TopNav name={intro.title} sections={sections} />
+      <TopNav name={intro.title} sections={sections.map((s) => ({ label: s.label }))} />
       <main>
         <Hero intro={intro} socialLinks={socialLinks} sections={sections} />
+        <StatsBand />
+        <Marquee />
         <Sections sections={sections} />
       </main>
       <Footer socialLinks={socialLinks} name={intro.title} />

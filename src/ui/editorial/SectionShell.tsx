@@ -19,9 +19,15 @@ export function SectionShell({
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className="scroll-mt-20 border-t border-line py-16 sm:py-24"
+      className="relative overflow-hidden scroll-mt-20 border-t border-line py-16 sm:py-24"
     >
-      <Container>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-4 right-0 select-none font-display text-[24vw] font-bold uppercase leading-none tracking-tighter text-ink/[0.035] lg:text-[13rem]"
+      >
+        {label}
+      </span>
+      <Container className="relative z-10">
         <div className="grid gap-8 lg:grid-cols-[12rem_1fr] lg:gap-16">
           <div data-animate className="lg:sticky lg:top-28 lg:self-start">
             <h2

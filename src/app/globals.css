@@ -28,6 +28,13 @@
 
   body {
     background-color: var(--color-canvas);
+    /* Faint fixed dot grid for texture/depth. */
+    background-image: radial-gradient(
+      rgba(237, 237, 237, 0.025) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -102,17 +109,37 @@
   }
 }
 
-/* Projects: inline thumbnail vs floating cursor preview. The floating preview
-   is reserved for fine-pointer desktops; everything else gets the thumbnail. */
-.preview-float {
-  display: none;
-}
-@media (min-width: 1024px) and (pointer: fine) {
-  .project-thumb {
-    display: none;
+/* Skills marquee — full-bleed infinite ticker (two identical tracks chained). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
   }
-  .preview-float {
-    display: block;
+  to {
+    transform: translateX(-100%);
+  }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
   }
 }
 

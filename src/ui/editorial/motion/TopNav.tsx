@@ -1,10 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { Section } from '@/types/content';
 import { SECTION_META } from '../sectionMeta';
 
-export function TopNav({ name, sections }: { name: string; sections: Section[] }) {
+// Only the section labels are needed here — keep the client payload minimal
+// (passing full Section objects would serialize all content into the RSC flight).
+export function TopNav({
+  name,
+  sections,
+}: {
+  name: string;
+  sections: { label: string }[];
+}) {
   const [progress, setProgress] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('');

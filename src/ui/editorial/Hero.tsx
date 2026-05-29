@@ -4,6 +4,7 @@ import { Container } from './Container';
 import { SocialRow } from './SocialRow';
 import { SECTION_META } from './sectionMeta';
 import { HeroGlow } from './motion/HeroGlow';
+import { RotatingText } from './motion/RotatingText';
 
 export function Hero({
   intro,
@@ -14,6 +15,13 @@ export function Hero({
   socialLinks: SocialLinkData[];
   sections: Section[];
 }) {
+  const roles = [
+    intro.subTitle,
+    'UI Architect',
+    'Design Systems Leader',
+    'Frontend Engineer',
+  ];
+
   return (
     <section
       aria-label="Introduction"
@@ -22,13 +30,16 @@ export function Hero({
       <HeroGlow />
 
       <Container className="relative z-10">
-        <p
+        <div
           data-hero-fade
-          className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-muted"
+          className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-muted"
         >
-          <span className="inline-block h-2 w-2 rounded-full bg-accent" />
-          {intro.subTitle}
-        </p>
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 motion-safe:animate-ping" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+          </span>
+          <RotatingText items={roles} />
+        </div>
 
         <h1
           data-split
