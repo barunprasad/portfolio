@@ -117,15 +117,26 @@ Each phase ends with a working, committable app.
 ### Phase 0 — Branch & safety net ✅ (this branch)
 - `redesign/editorial-minimal` created. Land this plan doc first.
 
-### Phase 1 — Foundation (upgrade + Tailwind, app still renders)
-- Upgrade Next 16.2 / React 19.2; run `next` codemods; verify build.
-- Add Tailwind v4 + PostCSS; create `src/app/globals.css` with color/type/spacing tokens (`@theme`).
-- Wire self-hosted fonts via `next/font` (General Sans, Inter, Geist Mono).
-- Remove Pigment from `next.config.ts`; strip Arctic theme; delete `src/pigment.d.ts`.
-- Temporarily keep old components compiling (or stub) so the app boots.
-- **Exit:** `next build` green on the new stack; page renders (unstyled-ish is fine).
+### Phase 1 — Tailwind foundation (additive; existing UI unchanged)
+**Stays on Next 15 / React RC** — the framework major is deferred to Phase 2 (see note below).
+- Add Tailwind v4 + `@tailwindcss/postcss`; create `src/app/globals.css`
+  (`@import "tailwindcss"` + `@theme` tokens). Coexists with Pigment/SCSS — no removals yet.
+- Define dark color tokens + accent, spacing, radii in `@theme`.
+- Wire self-hosted fonts: Inter (body) + Geist Mono (labels) via `next/font`; expose `--font-*`
+  to Tailwind. Display font (General Sans) deferred to Phase 2 (needs font files).
+- Do **not** remove Pigment/Arctic or upgrade the framework yet (coupled — see note).
+- **Exit:** `yarn build` green; Tailwind utilities available; existing UI visually unchanged.
 
-### Phase 2 — Layout & type (no motion yet)
+> **Phasing note (Pigment ⇄ Turbopack):** `withPigment` from `@pigment-css/nextjs-plugin` is a
+> webpack plugin and is **incompatible with Turbopack**, the default bundler in Next 16. Upgrading
+> to Next 16 while Pigment is still wired would break the build. Therefore the **Next 16.2 / React
+> 19.2 upgrade is moved into Phase 2** and done *after* Pigment is removed.
+
+### Phase 2 — Component rewrite + framework upgrade (no motion yet)
+- Rewrite the handful of Pigment/Arctic/framer components to plain Tailwind, then **remove**
+  `@arctic-kit/*`, `@pigment-css/*`, `framer-motion`, `sass`; strip `withPigment` from
+  `next.config.ts`; delete `src/pigment.d.ts`.
+- With Pigment gone, **upgrade Next 16.2 / React 19.2** (Turbopack now safe); run codemods; verify build.
 - Rebuild `src/app/page.tsx` as the single-column editorial layout (hero → sections → footer).
 - New presentational components (Tailwind): `Hero`, `SectionBlock`, `WorkItem`, `ProjectList`,
   `WritingList`, `Footer`, `SocialRow`, `Chip`.
@@ -148,8 +159,24 @@ Each phase ends with a working, committable app.
 
 ---
 
-## 5. Performance & a11y guardrails
-- SSG/ISR preserved → instant first paint.
+## 5. SEO (non-negotiable), performance & a11y guardrails
+
+### SEO — hard constraint (must not regress)
+- **All content server-rendered** (SSG/ISR). Page stays an async Server Component; text is present
+  in the initial HTML, never client-only.
+- **Motion is progressive enhancement.** Page must be fully readable and the DOM intact with JS
+  disabled. Reveal "hidden" initial states are applied via a **JS-added class** (e.g. `.js .reveal`),
+  never raw CSS — so crawlers and no-JS users see all content.
+- **SplitText safety:** text content stays in the DOM; restore/un-split under reduced motion; ensure
+  headings remain a single semantic element.
+- **Semantic HTML:** one `<h1>`, correct heading order, `nav`/`main`/`footer` landmarks, alt text on
+  every image.
+- **Structured data:** add JSON-LD (`Person` + `WebSite`); keep/improve `siteMetadata.ts`, canonical,
+  OG/Twitter tags, sitemap, robots.
+- **Target Lighthouse SEO = 100** (not just 95).
+
+### Performance & a11y
+- SSG/ISR preserved → instant first paint; protect Core Web Vitals (no CLS).
 - Transform/opacity-only animations (GPU); no layout-thrashing reveals.
 - Motion JS lazy-loaded; Lenis + GSAP only on the client, after hydration.
 - Full `prefers-reduced-motion: reduce` path (instant reveals, no smooth-scroll hijack).
@@ -159,7 +186,10 @@ Each phase ends with a working, committable app.
 ---
 
 ## 6. Risks
-- **Next 16 / React 19.2 upgrade churn** — async APIs, possible codemod fixes. Isolated in Phase 1.
+- **Pigment ⇄ Turbopack incompatibility (confirmed)** — `withPigment` is webpack-only; Next 16 defaults
+  to Turbopack. Mitigation: remove Pigment *before* the Next 16 upgrade (both in Phase 2).
+- **Next 16 / React 19.2 upgrade churn** — async APIs, possible codemod fixes. Isolated in Phase 2.
+- **SEO regression from motion** — mitigated by server-rendered content + JS-gated reveals (see §5).
 - **SplitText + a11y** — ensure split text stays readable to screen readers (aria / re-join on reduced motion).
 - **Hover-preview on touch** — needs a tap/non-hover fallback (show thumbnail inline on mobile).
 - **Dropping the theme toggle** — confirm before deleting `SchemeSwitch`/`ThemeToggle`.
@@ -169,5 +199,7 @@ Each phase ends with a working, committable app.
 - [ ] Single-column editorial layout, committed dark theme, one accent.
 - [ ] GSAP + Lenis scroll reveals; reduced-motion fallback verified.
 - [ ] Hygraph/ISR/analytics still functional.
-- [ ] Lighthouse ≥ 95 (Performance, A11y, Best Practices, SEO) on mobile.
+- [ ] All content present in server-rendered HTML; page readable with JS disabled.
+- [ ] JSON-LD (Person + WebSite) present; metadata/OG/sitemap/robots intact.
+- [ ] Lighthouse **SEO = 100**; Performance/A11y/Best Practices ≥ 95 on mobile.
 - [ ] Responsive from 360px → wide desktop.
