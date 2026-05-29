@@ -22,10 +22,12 @@ scroll-driven motion (GSAP + Lenis). Must stay **fast** (SSG/ISR, Lighthouse 95+
 | Mood | **Dark + electric accent** (committed single dark theme) |
 | Motion | **GSAP** (free, all plugins) + **Lenis** smooth scroll, `prefers-reduced-motion` aware |
 
+### Resolved decisions
+- **Accent color:** ✅ acid lime `#C8FF00` (locked).
+- **Font pairing:** ✅ General Sans (display, self-hosted via `next/font/local`) + Inter (body) + Geist Mono (labels).
+
 ### Open (non-blocking) decisions
-- **Accent color:** acid lime `#C8FF00` (recommended) vs electric cyan `#3DD7FF` vs amber `#FFB020`.
-- **Font pairing:** General Sans (display) + Inter (body) + Geist Mono (labels) — recommended.
-- **Theme toggle:** recommend **removing** light/dark toggle and committing to dark. (Decision pending.)
+- **Theme toggle:** recommend **removing** light/dark toggle and committing to dark. (Decision pending — affects whether `SchemeSwitch`/`ThemeToggle` are deleted in Phase 2.)
 
 ---
 

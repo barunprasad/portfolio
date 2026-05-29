@@ -20,7 +20,7 @@
   --color-ink: #ededed; /* primary text */
   --color-muted: #8a8a8e; /* secondary text, mono labels */
   --color-line: #26262a; /* hairlines, dividers */
-  --color-accent: #c8ff00; /* electric accent (final choice pending: lime/cyan/amber) */
+  --color-accent: #c8ff00; /* acid lime — locked accent */
 
   /* ── Typography ─────────────────────────────────────────────────────── */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
