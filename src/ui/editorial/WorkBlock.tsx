@@ -10,7 +10,10 @@ const RECENT_COUNT = 5;
 function WorkItem({ job }: { job: ExperienceEntry }) {
   const org = job.organization;
   return (
-    <li className="group grid gap-2 border-b border-line/60 py-6 last:border-b-0 sm:grid-cols-[8rem_1fr] sm:gap-6">
+    <li
+      data-animate
+      className="group grid gap-2 border-b border-line/60 py-6 last:border-b-0 sm:grid-cols-[8rem_1fr] sm:gap-6"
+    >
       <p className="pt-1 font-mono text-xs uppercase tracking-wider text-muted">
         {job.duration}
       </p>

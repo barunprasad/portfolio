@@ -5,7 +5,7 @@ export function LearningBlock({ items }: { items: LearningEntry[] }) {
   return (
     <ul className="flex flex-col">
       {items.map((item) => (
-        <li key={item.title} className="border-b border-line/60 py-6 last:border-b-0">
+        <li key={item.title} data-animate className="border-b border-line/60 py-6 last:border-b-0">
           <h3 className="text-lg font-medium text-ink">{item.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
           {item.certificateUrl && (

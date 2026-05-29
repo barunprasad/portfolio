@@ -5,7 +5,7 @@ export function WritingBlock({ items }: { items: BlogEntry[] }) {
   return (
     <ul className="flex flex-col">
       {items.map((post) => (
-        <li key={post.url} className="border-b border-line/60 last:border-b-0">
+        <li key={post.url} data-animate className="border-b border-line/60 last:border-b-0">
           <a
             href={post.url}
             target="_blank"

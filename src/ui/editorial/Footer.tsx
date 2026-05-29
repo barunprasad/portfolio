@@ -2,6 +2,7 @@ import type { SocialLinkData } from '@/lib/data-provider';
 import { Container } from './Container';
 import { SocialRow } from './SocialRow';
 import { ArrowUpRight } from './ArrowUpRight';
+import { Magnetic } from './motion/Magnetic';
 
 export function Footer({
   socialLinks,
@@ -14,30 +15,40 @@ export function Footer({
   const linkedin = socialLinks.find((l) => l.platform.toLowerCase() === 'linkedin');
 
   return (
-    <footer id="contact" className="scroll-mt-20 border-t border-line py-20 sm:py-28">
+    <footer id="contact" className="scroll-mt-20 border-t border-line py-24 sm:py-32">
       <Container>
-        <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+        <p
+          data-animate
+          className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-muted"
+        >
           <span className="inline-block h-2 w-2 rounded-full bg-accent" />
           Get in touch
         </p>
 
-        <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+        <h2
+          data-animate
+          className="mt-6 font-display text-[clamp(2.25rem,7vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-ink"
+        >
           Let&rsquo;s build something<span className="text-accent">.</span>
         </h2>
 
         {linkedin && (
-          <a
-            href={linkedin.url}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="group mt-8 inline-flex items-center gap-2 font-display text-xl text-ink underline-offset-8 transition-colors hover:text-accent hover:underline sm:text-2xl"
-          >
-            Connect on LinkedIn
-            <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-          </a>
+          <div data-animate className="mt-10">
+            <Magnetic>
+              <a
+                href={linkedin.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="link-underline inline-flex items-center gap-2 font-display text-xl text-ink transition-colors hover:text-accent sm:text-2xl"
+              >
+                Connect on LinkedIn
+                <ArrowUpRight className="h-5 w-5" />
+              </a>
+            </Magnetic>
+          </div>
         )}
 
-        <div className="mt-16 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-20 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-xs text-muted">
             © {year} {name}
           </p>
