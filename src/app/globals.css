@@ -80,7 +80,7 @@
   @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
     [data-animate],
     [data-hero-fade],
-    [data-split] {
+    [data-hero-name] {
       opacity: 0;
     }
   }
@@ -139,6 +139,74 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
+    animation: none;
+  }
+}
+
+/* Hero name spotlight — only active on fine-pointer desktops (data-spotlight set
+   by SpotlightName). The name dims to grey and brightens where the cursor is. */
+[data-spotlight='on'] {
+  background-image: radial-gradient(
+    20rem 20rem at var(--sx, 50%) var(--sy, 50%),
+    #ffffff 0%,
+    var(--color-ink) 12%,
+    #54545b 55%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Hero aurora — slow drifting gradient blobs. */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.6;
+  will-change: transform;
+}
+.aurora-1 {
+  width: 34rem;
+  height: 34rem;
+  top: -8rem;
+  left: -6rem;
+  background: radial-gradient(circle, rgba(200, 255, 0, 0.18), transparent 68%);
+  animation: drift-a 20s ease-in-out infinite alternate;
+}
+.aurora-2 {
+  width: 28rem;
+  height: 28rem;
+  top: 18%;
+  right: -6rem;
+  background: radial-gradient(circle, rgba(120, 230, 180, 0.12), transparent 68%);
+  animation: drift-b 24s ease-in-out infinite alternate;
+}
+.aurora-3 {
+  width: 26rem;
+  height: 26rem;
+  bottom: -6rem;
+  left: 28%;
+  background: radial-gradient(circle, rgba(200, 255, 0, 0.1), transparent 70%);
+  animation: drift-c 28s ease-in-out infinite alternate;
+}
+@keyframes drift-a {
+  to {
+    transform: translate(8rem, 5rem) scale(1.2);
+  }
+}
+@keyframes drift-b {
+  to {
+    transform: translate(-6rem, 4rem) scale(1.1);
+  }
+}
+@keyframes drift-c {
+  to {
+    transform: translate(4rem, -5rem) scale(1.15);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
     animation: none;
   }
 }

@@ -1,19 +1,18 @@
+import type { ReactNode } from 'react';
 import type { IntroSectionData, SocialLinkData } from '@/lib/data-provider';
-import type { Section } from '@/types/content';
 import { Container } from './Container';
 import { SocialRow } from './SocialRow';
-import { SECTION_META } from './sectionMeta';
-import { HeroGlow } from './motion/HeroGlow';
+import { HeroAurora } from './HeroAurora';
 import { RotatingText } from './motion/RotatingText';
+import { SpotlightName } from './motion/SpotlightName';
+import { LocalTime } from './motion/LocalTime';
 
 export function Hero({
   intro,
   socialLinks,
-  sections,
 }: {
   intro: IntroSectionData;
   socialLinks: SocialLinkData[];
-  sections: Section[];
 }) {
   const roles = [
     intro.subTitle,
@@ -22,12 +21,27 @@ export function Hero({
     'Frontend Engineer',
   ];
 
+  // Composed "title card" metadata. `Currently` reflects the latest role.
+  const meta: { label: string; value: ReactNode }[] = [
+    { label: 'Based in', value: 'Bengaluru, IN' },
+    {
+      label: 'Local time',
+      value: (
+        <>
+          <LocalTime /> IST
+        </>
+      ),
+    },
+    { label: 'Currently', value: 'Code & Theory' },
+    { label: 'Focus', value: 'Design Systems · FE Architecture' },
+  ];
+
   return (
     <section
       aria-label="Introduction"
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-28"
     >
-      <HeroGlow />
+      <HeroAurora />
 
       <Container className="relative z-10">
         <div
@@ -41,12 +55,10 @@ export function Hero({
           <RotatingText items={roles} />
         </div>
 
-        <h1
-          data-split
+        <SpotlightName
+          text={intro.title}
           className="mt-6 font-display text-[clamp(2.75rem,11vw,8.5rem)] font-semibold leading-[0.92] tracking-[-0.02em] text-ink"
-        >
-          {intro.title}
-        </h1>
+        />
 
         <p
           data-hero-fade
@@ -55,29 +67,21 @@ export function Hero({
           {intro.description}
         </p>
 
-        <nav data-hero-fade aria-label="Page sections" className="mt-14">
-          <ul className="flex flex-col gap-1">
-            {sections.map((section, i) => (
-              <li key={section.label}>
-                <a
-                  href={`#${section.label}`}
-                  className="group inline-flex items-center gap-3 py-1 font-mono text-sm text-muted transition-colors hover:text-ink"
-                >
-                  <span className="text-accent" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span>{SECTION_META[section.label] ?? section.label}</span>
-                  <span
-                    aria-hidden="true"
-                    className="h-px w-6 bg-line transition-all duration-300 group-hover:w-12 group-hover:bg-accent"
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <dl
+          data-hero-fade
+          className="mt-12 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8 lg:grid-cols-4"
+        >
+          {meta.map((m) => (
+            <div key={m.label}>
+              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                {m.label}
+              </dt>
+              <dd className="mt-1.5 text-sm text-ink">{m.value}</dd>
+            </div>
+          ))}
+        </dl>
 
-        <div data-hero-fade className="mt-14">
+        <div data-hero-fade className="mt-12">
           <SocialRow links={socialLinks} />
         </div>
       </Container>

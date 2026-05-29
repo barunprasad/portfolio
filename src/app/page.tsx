@@ -30,7 +30,7 @@ export default async function Index() {
       <MotionProvider />
       <TopNav name={intro.title} sections={sections.map((s) => ({ label: s.label }))} />
       <main>
-        <Hero intro={intro} socialLinks={socialLinks} sections={sections} />
+        <Hero intro={intro} socialLinks={socialLinks} />
         <StatsBand />
         <Marquee />
         <Sections sections={sections} />
