@@ -1,17 +1,4 @@
-/*
- * Tailwind v4 foundation (Phase 1 of the editorial-minimal redesign).
- *
- * NOTE: Preflight (Tailwind's base reset) is intentionally OMITTED for now so the
- * existing Pigment/Arctic UI renders unchanged. We import only the `theme` and
- * `utilities` layers. When the layout is rebuilt in Phase 2 and the old stack is
- * removed, switch this to the full `@import "tailwindcss";` to enable preflight.
- *
- * Docs: https://tailwindcss.com/docs/preflight#disabling-preflight
- */
-@layer theme, base, components, utilities;
-
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import 'tailwindcss';
 
 @theme {
   /* ── Canvas + accent — committed dark theme ─────────────────────────── */
@@ -26,6 +13,41 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-  /* Display falls back to sans until General Sans files are added in Phase 2 */
-  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-general-sans), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #0a0a0b;
+  }
+
+  /* Respect users who prefer reduced motion — disable transitions/animations
+     and smooth scroll (motion is always progressive enhancement). */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }

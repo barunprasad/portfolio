@@ -40,6 +40,9 @@ export const siteMetadata: Metadata = {
     images: ['/images/profile_image.jpg'],
   },
   robots: 'index, follow',
+  alternates: {
+    canonical: '/',
+  },
   authors: {
     name: 'Barun Prasad',
     url: 'https://www.barunprasad.com',

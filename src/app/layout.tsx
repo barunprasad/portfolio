@@ -1,16 +1,15 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.scss';
 import './globals.css';
-import '@pigment-css/react/styles.css';
-import '@arctic-kit/snow/style.css';
 import { siteMetadata } from './siteMetadata';
-import { inter, GeistMono } from './fonts';
+import { inter, generalSans, GeistMono } from './fonts';
 
 export const metadata: Metadata = { ...siteMetadata };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#0a0a0b',
+  colorScheme: 'dark',
 };
 
 export default function RootLayout({
@@ -21,9 +20,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`theme-dark ${inter.variable} ${GeistMono.variable}`}
+      className={`${inter.variable} ${generalSans.variable} ${GeistMono.variable}`}
     >
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

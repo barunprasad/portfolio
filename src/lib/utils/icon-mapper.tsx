@@ -1,7 +1,8 @@
+import type { ReactElement } from 'react';
 import { GitHubIcon, LinkedInIcon, MediumIcon, TwitterIcon } from '@/ui/icons';
 
 export const getIconComponent = (iconName: string) => {
-  const iconMap: Record<string, JSX.Element> = {
+  const iconMap: Record<string, ReactElement> = {
     github: <GitHubIcon />,
     linkedin: <LinkedInIcon />,
     medium: <MediumIcon />,
