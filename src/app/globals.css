@@ -1,0 +1,31 @@
+/*
+ * Tailwind v4 foundation (Phase 1 of the editorial-minimal redesign).
+ *
+ * NOTE: Preflight (Tailwind's base reset) is intentionally OMITTED for now so the
+ * existing Pigment/Arctic UI renders unchanged. We import only the `theme` and
+ * `utilities` layers. When the layout is rebuilt in Phase 2 and the old stack is
+ * removed, switch this to the full `@import "tailwindcss";` to enable preflight.
+ *
+ * Docs: https://tailwindcss.com/docs/preflight#disabling-preflight
+ */
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+  /* ── Canvas + accent — committed dark theme ─────────────────────────── */
+  --color-canvas: #0a0a0b; /* page background */
+  --color-surface: #121214; /* cards, hover surfaces */
+  --color-ink: #ededed; /* primary text */
+  --color-muted: #8a8a8e; /* secondary text, mono labels */
+  --color-line: #26262a; /* hairlines, dividers */
+  --color-accent: #c8ff00; /* electric accent (final choice pending: lime/cyan/amber) */
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  /* Display falls back to sans until General Sans files are added in Phase 2 */
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}

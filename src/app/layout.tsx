@@ -1,15 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.scss';
+import './globals.css';
 import '@pigment-css/react/styles.css';
 import '@arctic-kit/snow/style.css';
 import { siteMetadata } from './siteMetadata';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '900'],
-});
+import { inter, GeistMono } from './fonts';
 
 export const metadata: Metadata = { ...siteMetadata };
 
@@ -24,7 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="theme-dark">
+    <html
+      lang="en"
+      className={`theme-dark ${inter.variable} ${GeistMono.variable}`}
+    >
       <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   );
