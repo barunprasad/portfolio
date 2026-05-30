@@ -3,11 +3,10 @@ import { highlight } from './highlight';
 
 // Phrases emphasized in accent within the bio lead.
 const ACCENT_KEYWORDS = [
-  'Engineering leader',
+  'engineering leader',
   '18+ years',
   'design systems',
-  'platform architecture',
-  'AI-assisted',
+  'build with AI',
 ];
 
 export function AboutBlock({ items }: { items: AboutContent[] }) {
