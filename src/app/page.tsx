@@ -28,7 +28,11 @@ export default async function Index() {
     <ClientLayout>
       <PersonJsonLd intro={intro} socialLinks={socialLinks} />
       <MotionProvider />
-      <TopNav name={intro.title} sections={sections.map((s) => ({ label: s.label }))} />
+      <TopNav
+        name={intro.title}
+        sections={sections.map((s) => ({ label: s.label }))}
+        socialLinks={socialLinks}
+      />
       <main>
         <Hero intro={intro} socialLinks={socialLinks} />
         <StatsBand />
