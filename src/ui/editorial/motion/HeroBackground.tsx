@@ -65,7 +65,7 @@ export function HeroBackground() {
       // base grid — barely there everywhere
       ctx.globalCompositeOperation = 'source-over';
       ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(200,255,0,0.022)';
+      ctx.strokeStyle = 'rgba(200,255,0,0.011)';
       gridLines(offX, offY);
       ctx.stroke();
 
@@ -74,9 +74,9 @@ export function HeroBackground() {
       // brighter grid revealed near the light — concentric clips give a soft
       // additive falloff (no hard circle edge)
       for (const ring of [
-        { r: R, a: 0.014 },
-        { r: R * 0.66, a: 0.022 },
-        { r: R * 0.34, a: 0.03 },
+        { r: R, a: 0.007 },
+        { r: R * 0.66, a: 0.012 },
+        { r: R * 0.34, a: 0.016 },
       ]) {
         ctx.save();
         ctx.beginPath();
