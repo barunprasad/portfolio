@@ -168,6 +168,20 @@
   color: transparent;
 }
 
+/* Cursor-reactive 3D tilt (vars set by TiltCard; flat by default). */
+.tilt {
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none !important;
+    transition: none;
+  }
+}
+
 /* Hero aurora — slow drifting gradient blobs. */
 .aurora-blob {
   position: absolute;
