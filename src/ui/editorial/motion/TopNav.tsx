@@ -58,6 +58,10 @@ export function TopNav({
         aria-hidden="true"
       />
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
+        {/* Intentional <a>: a scroll-to-top control (intercepted by Lenis; falls
+            back to a clean "/" load with JS off). A <Link> would fight the
+            smooth-scroll interceptor. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a
           href="/"
           data-scroll-top

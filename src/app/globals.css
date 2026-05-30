@@ -47,6 +47,13 @@
     color: #0a0a0b;
   }
 
+  /* Visible, on-brand keyboard focus indicator for all interactive elements. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
   /* Lenis smooth-scroll baseline styles. */
   html.lenis,
   html.lenis body {
