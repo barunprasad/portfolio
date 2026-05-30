@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-// Branded favicon — lime "B" on the dark canvas (matches the site identity).
+// Branded favicon — dark "B" on the lime accent (matches the site identity).
 export const size = { width: 512, height: 512 };
 export const contentType = 'image/png';
 
@@ -19,8 +19,8 @@ export default async function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#0a0a0b',
-          color: '#c8ff00',
+          background: '#c8ff00',
+          color: '#0a0a0b',
           fontFamily: 'General Sans',
           fontWeight: 700,
           fontSize: 320,
