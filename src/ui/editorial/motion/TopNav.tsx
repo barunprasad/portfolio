@@ -61,7 +61,7 @@ export function TopNav({
         <a
           href="/"
           data-scroll-top
-          aria-label="Back to top"
+          title="Back to top"
           className="font-display text-sm font-semibold tracking-tight text-ink"
         >
           {name}

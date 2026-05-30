@@ -79,8 +79,7 @@
      reduced-motion / unsupported browsers see everything. */
   @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
     [data-animate],
-    [data-hero-fade],
-    [data-hero-name] {
+    [data-hero-fade] {
       opacity: 0;
     }
   }
@@ -166,8 +165,8 @@
 .aurora-blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.6;
+  filter: blur(72px);
+  opacity: 0.55;
   will-change: transform;
 }
 .aurora-1 {

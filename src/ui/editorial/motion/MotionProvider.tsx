@@ -51,19 +51,19 @@ export function MotionProvider() {
     document.addEventListener('click', onClick);
 
     const ctx = gsap.context(() => {
-      // Hero intro — the name wipes up; everything else fades up.
-      const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-      tl.fromTo(
-        '[data-hero-name]',
-        { opacity: 0, clipPath: 'inset(100% 0 0 0)' },
-        { opacity: 1, clipPath: 'inset(0% 0 0 0)', duration: 1.1 },
-        0,
-      );
-      tl.fromTo(
+      // Hero intro — fade up the surrounding elements. The name itself paints
+      // immediately (it's the LCP element), so it is never hidden/animated.
+      gsap.fromTo(
         '[data-hero-fade]',
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.08 },
-        0.2,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'expo.out',
+          stagger: 0.08,
+          delay: 0.1,
+        },
       );
 
       // Reveal-on-scroll. Elements already in (or above) the viewport on load
