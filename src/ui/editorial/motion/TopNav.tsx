@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { SocialLinkData } from '@/lib/data-provider';
 import { SECTION_META } from '../sectionMeta';
 import { SocialRow } from '../SocialRow';
+import { ArrowUpRight } from '../ArrowUpRight';
 
 // Only the section labels are needed here — keep the client payload minimal
 // (passing full Section objects would serialize all content into the RSC flight).
@@ -22,6 +23,11 @@ export function TopNav({
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+
+  // Primary contact channel for the menu CTA (LinkedIn, with a graceful fallback).
+  const contact =
+    socialLinks.find((l) => l.platform.toLowerCase().includes('linkedin')) ??
+    socialLinks[0];
 
   useEffect(() => {
     const onScroll = () => {
@@ -179,11 +185,38 @@ export function TopNav({
             ))}
           </nav>
 
-          <div className="mt-auto flex items-center justify-between gap-4 pt-10">
-            <SocialRow links={socialLinks} />
-            <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
-              Bengaluru, IN
-            </span>
+          <div className="mt-auto pt-10">
+            {contact && (
+              <a
+                href={contact.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                onClick={() => setOpen(false)}
+                style={{
+                  transitionDelay: open ? `${120 + sections.length * 55}ms` : '0ms',
+                }}
+                className={`group flex items-center justify-between gap-4 rounded-xl border border-line bg-surface/40 px-5 py-4 transition-[transform,opacity,border-color,background-color] duration-500 ease-out hover:border-accent/50 hover:bg-surface/70 ${
+                  open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
+                }`}
+              >
+                <span className="flex flex-col">
+                  <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                    Get in touch
+                  </span>
+                  <span className="font-display text-xl font-semibold text-ink transition-colors group-hover:text-accent">
+                    Let&rsquo;s work together
+                  </span>
+                </span>
+                <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+              </a>
+            )}
+
+            <div className="mt-6 flex items-center justify-between gap-4">
+              <SocialRow links={socialLinks} />
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                Bengaluru, IN
+              </span>
+            </div>
           </div>
         </div>
       </div>
