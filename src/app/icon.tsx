@@ -24,6 +24,7 @@ export default async function Icon() {
           fontFamily: 'General Sans',
           fontWeight: 700,
           fontSize: 320,
+          borderRadius: 112,
         }}
       >
         B
