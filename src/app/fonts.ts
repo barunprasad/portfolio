@@ -12,8 +12,9 @@ export const inter = Inter({
 
 // Display font for headlines (--font-display), self-hosted from Fontshare.
 export const generalSans = localFont({
+  // Display font is only ever used at 500/600/700 — skip Regular to avoid
+  // preloading a weight that's never rendered.
   src: [
-    { path: '../fonts/general-sans/GeneralSans-Regular.woff2', weight: '400', style: 'normal' },
     { path: '../fonts/general-sans/GeneralSans-Medium.woff2', weight: '500', style: 'normal' },
     { path: '../fonts/general-sans/GeneralSans-Semibold.woff2', weight: '600', style: 'normal' },
     { path: '../fonts/general-sans/GeneralSans-Bold.woff2', weight: '700', style: 'normal' },

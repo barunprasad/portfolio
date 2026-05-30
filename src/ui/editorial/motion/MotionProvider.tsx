@@ -27,9 +27,15 @@ export function MotionProvider() {
     // Route in-page anchor clicks through Lenis for a smooth scroll.
     const onClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement | null)?.closest(
-        'a[href^="#"]',
+        'a[href^="#"], a[data-scroll-top]',
       ) as HTMLAnchorElement | null;
       if (!anchor) return;
+      // Header name / "scroll to top" link: smooth-scroll up, never add a hash.
+      if (anchor.hasAttribute('data-scroll-top')) {
+        e.preventDefault();
+        lenis.scrollTo(0);
+        return;
+      }
       const href = anchor.getAttribute('href');
       if (!href) return;
       if (href === '#') {
@@ -70,7 +76,7 @@ export function MotionProvider() {
       const alreadyVisible = targets.filter(
         (el) => el.getBoundingClientRect().top < window.innerHeight,
       );
-      gsap.set(alreadyVisible, { opacity: 1, y: 0 });
+      if (alreadyVisible.length) gsap.set(alreadyVisible, { opacity: 1, y: 0 });
 
       // Fire once, the moment an element enters from the bottom. Short duration
       // + small stagger so fast scrolling never leaves a blank-then-pop frame.

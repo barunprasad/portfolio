@@ -59,7 +59,9 @@ export function TopNav({
       />
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
         <a
-          href="#"
+          href="/"
+          data-scroll-top
+          aria-label="Back to top"
           className="font-display text-sm font-semibold tracking-tight text-ink"
         >
           {name}
