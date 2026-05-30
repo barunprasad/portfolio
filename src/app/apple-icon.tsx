@@ -22,10 +22,11 @@ export default async function AppleIcon() {
           color: '#0a0a0b',
           fontFamily: 'General Sans',
           fontWeight: 700,
-          fontSize: 112,
+          fontSize: 104,
+          letterSpacing: -3,
         }}
       >
-        B
+        B.
       </div>
     ),
     {
