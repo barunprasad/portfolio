@@ -3,6 +3,7 @@ import type { IntroSectionData, SocialLinkData } from '@/lib/data-provider';
 import { Container } from './Container';
 import { SocialRow } from './SocialRow';
 import { HeroAurora } from './HeroAurora';
+import { HeroNetwork } from './motion/HeroNetwork';
 import { RotatingText } from './motion/RotatingText';
 import { SpotlightName } from './motion/SpotlightName';
 import { LocalTime } from './motion/LocalTime';
@@ -42,6 +43,7 @@ export function Hero({
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-28"
     >
       <HeroAurora />
+      <HeroNetwork />
 
       <Container className="relative z-10">
         <div
