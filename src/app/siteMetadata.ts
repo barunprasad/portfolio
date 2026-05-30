@@ -4,7 +4,7 @@ export const siteMetadata: Metadata = {
   metadataBase: new URL('https://www.barunprasad.com'),
   title: 'Barun Prasad — Engineering Leader & Frontend Architect',
   description:
-    'Portfolio of Barun Prasad — an engineering leader with 18+ years across frontend platforms, design systems, and team leadership, increasingly building with AI. Scalable, accessible, high-performance frontend.',
+    'Portfolio of Barun Prasad — an engineering leader with 19 years across frontend platforms, design systems, and team leadership, increasingly building with AI. Scalable, accessible, high-performance frontend.',
   keywords: [
     'Barun Prasad',
     'Engineering Leader',
@@ -20,7 +20,7 @@ export const siteMetadata: Metadata = {
   openGraph: {
     title: 'Barun Prasad — Engineering Leader & Frontend Architect',
     description:
-      'Engineering leader with 18+ years across frontend platforms, design systems, and team leadership — increasingly building with AI.',
+      'Engineering leader with 19 years across frontend platforms, design systems, and team leadership — increasingly building with AI.',
     url: 'https://www.barunprasad.com',
     siteName: 'Barun Prasad',
     locale: 'en_US',
@@ -31,7 +31,7 @@ export const siteMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Barun Prasad — Engineering Leader & Frontend Architect',
     description:
-      'Engineering leader with 18+ years across frontend platforms, design systems, and team leadership — increasingly building with AI.',
+      'Engineering leader with 19 years across frontend platforms, design systems, and team leadership — increasingly building with AI.',
     creator: '@iambarunprasad',
     site: '@iambarunprasad',
     // twitter:image falls back to app/opengraph-image.tsx.

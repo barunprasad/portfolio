@@ -2,7 +2,7 @@ import { Container } from './Container';
 
 // Headline metrics surfaced from the experience history.
 const STATS = [
-  { value: '18+', label: 'Years in engineering' },
+  { value: '19', label: 'Years in engineering' },
   { value: '40%', label: 'Faster delivery via design systems' },
   { value: '93%', label: 'Fewer POS transaction failures' },
   { value: '30%', label: 'Lower code complexity' },

@@ -4,7 +4,7 @@ import { highlight } from './highlight';
 // Phrases emphasized in accent within the bio lead.
 const ACCENT_KEYWORDS = [
   'engineering leader',
-  '18+ years',
+  '19 years',
   'design systems',
   'build with AI',
 ];
