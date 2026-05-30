@@ -45,7 +45,7 @@ export function Hero({
       <HeroAurora />
 
       <Container className="relative z-10 w-full">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-12">
           {/* Left — the words */}
           <div>
             <div
@@ -61,7 +61,7 @@ export function Hero({
 
             <SpotlightName
               text={intro.title}
-              className="mt-6 font-display text-[clamp(2.5rem,6.5vw,5.25rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-ink"
+              className="mt-6 font-display text-[clamp(2.75rem,8.5vw,7rem)] font-semibold leading-[0.92] tracking-[-0.02em] text-ink"
             />
 
             <p
@@ -93,7 +93,7 @@ export function Hero({
           {/* Right — the masterpiece */}
           <div
             data-hero-fade
-            className="relative mx-auto aspect-square w-full max-w-sm sm:max-w-md lg:max-w-none"
+            className="relative mx-auto aspect-square w-full max-w-[19rem] sm:max-w-sm lg:max-w-[24rem]"
           >
             <CognitionEngine />
           </div>
