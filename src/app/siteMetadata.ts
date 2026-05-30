@@ -20,31 +20,27 @@ export const siteMetadata: Metadata = {
   openGraph: {
     title: 'Barun Prasad — Engineering Leader & Frontend Architect',
     description:
-      "Engineering leader with 18+ years across frontend platforms, design systems, and team leadership — increasingly building with AI.",
+      'Engineering leader with 18+ years across frontend platforms, design systems, and team leadership — increasingly building with AI.',
     url: 'https://www.barunprasad.com',
+    siteName: 'Barun Prasad',
+    locale: 'en_US',
     type: 'website',
-    images: [
-      {
-        url: '/images/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Barun Prasad — Engineering Leader & Frontend Architect',
-      },
-    ],
+    // og:image is supplied by app/opengraph-image.tsx (dynamic, on-brand).
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Barun Prasad — Engineering Leader & Frontend Architect',
     description:
       'Engineering leader with 18+ years across frontend platforms, design systems, and team leadership — increasingly building with AI.',
-    images: ['/images/profile_image.jpg'],
+    creator: '@iambarunprasad',
+    site: '@iambarunprasad',
+    // twitter:image falls back to app/opengraph-image.tsx.
   },
   robots: 'index, follow',
   alternates: {
     canonical: '/',
   },
-  authors: {
-    name: 'Barun Prasad',
-    url: 'https://www.barunprasad.com',
-  },
+  authors: [{ name: 'Barun Prasad', url: 'https://www.barunprasad.com' }],
+  creator: 'Barun Prasad',
+  publisher: 'Barun Prasad',
 };
