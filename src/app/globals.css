@@ -121,6 +121,10 @@
 .marquee-track {
   animation: marquee 38s linear infinite;
 }
+.marquee-reverse {
+  animation-direction: reverse;
+  animation-duration: 46s;
+}
 .marquee-mask {
   -webkit-mask-image: linear-gradient(
     to right,

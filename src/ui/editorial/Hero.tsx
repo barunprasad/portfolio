@@ -15,10 +15,10 @@ export function Hero({
   socialLinks: SocialLinkData[];
 }) {
   const roles = [
-    intro.subTitle,
-    'UI Architect',
-    'Design Systems Leader',
-    'Frontend Engineer',
+    'Director of Technology',
+    'Engineering Leader',
+    'Frontend Architect',
+    'AI-augmented builder',
   ];
 
   // Composed "title card" metadata. `Currently` reflects the latest role.
@@ -33,7 +33,7 @@ export function Hero({
       ),
     },
     { label: 'Currently', value: 'Code & Theory' },
-    { label: 'Focus', value: 'Design Systems · FE Architecture' },
+    { label: 'Focus', value: 'Eng Leadership · Design Systems · AI' },
   ];
 
   return (

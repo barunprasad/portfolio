@@ -2,25 +2,25 @@ import type { Metadata } from 'next';
 
 export const siteMetadata: Metadata = {
   metadataBase: new URL('https://www.barunprasad.com'),
-  title: 'Barun Prasad - Frontend Evangelist',
+  title: 'Barun Prasad — Engineering Leader & Frontend Architect',
   description:
-    'Explore the portfolio of Barun Prasad, a seasoned Frontend Evangelist with expertise in UI strategy, React, and modern web development. Discover insights into accessible, scalable, and high-performance frontend solutions.',
+    'Portfolio of Barun Prasad — an engineering leader with 18+ years across frontend platforms, design systems, and team leadership, increasingly building with AI. Scalable, accessible, high-performance frontend.',
   keywords: [
-    'Frontend Evangelist',
     'Barun Prasad',
-    'UI Strategy',
-    'React Developer',
-    'Web Development',
-    'JavaScript',
-    'TypeScript',
-    'UI/UX',
-    'Next.js',
+    'Engineering Leader',
+    'Director of Technology',
     'Frontend Architect',
+    'Design Systems',
+    'AI-assisted Development',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'UI Strategy',
   ],
   openGraph: {
-    title: 'Barun Prasad - Frontend Evangelist',
+    title: 'Barun Prasad — Engineering Leader & Frontend Architect',
     description:
-      "Discover Barun Prasad's portfolio as a seasoned Frontend Evangelist with extensive experience in UI strategy and modern web development.",
+      "Engineering leader with 18+ years across frontend platforms, design systems, and team leadership — increasingly building with AI.",
     url: 'https://www.barunprasad.com',
     type: 'website',
     images: [
@@ -28,15 +28,15 @@ export const siteMetadata: Metadata = {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Barun Prasad - Frontend Evangelist',
+        alt: 'Barun Prasad — Engineering Leader & Frontend Architect',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Barun Prasad - Frontend Evangelist',
+    title: 'Barun Prasad — Engineering Leader & Frontend Architect',
     description:
-      'Explore the portfolio of Barun Prasad, a seasoned Frontend Evangelist with expertise in UI strategy, React, and modern web development.',
+      'Engineering leader with 18+ years across frontend platforms, design systems, and team leadership — increasingly building with AI.',
     images: ['/images/profile_image.jpg'],
   },
   robots: 'index, follow',
