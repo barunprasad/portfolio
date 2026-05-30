@@ -2,13 +2,14 @@
 
 import { useEffect, useRef } from 'react';
 
-// "Cognition Engine" — the hero masterpiece. An AI processing engine with a
-// spatial human⊕AI duality: organic branching dendrites feed from the LEFT
-// (the brain), right-angle circuit traces + data pulses on the RIGHT (the AI),
-// fused in a central processor — a dense neural mesh firing activations inside a
-// hex chip, ringed by a turbine and counter-rotating hex housing (the machine),
-// over a faint data-grid. Canvas 2D, additive glow, cursor-reactive. Guarded:
-// reduced-motion renders one static frame, touch goes lighter, loop pauses off-screen.
+// "Cognition Engine" — the hero masterpiece. A solid machine, not a starfield:
+// a dark machined body (face plate, rim with bolts, a toothed gear, a filled
+// turbine fan and intake ports) is rendered OPAQUE first so it has mass and a
+// real silhouette. Only the contained "mind" glows — a plasma core firing
+// synapses behind a breathing mechanical iris. Left intake ports are organic
+// (the brain), right ports are square circuit pads (the AI). Canvas 2D,
+// cursor-reactive. Guarded: reduced-motion renders one static frame, touch goes
+// lighter, the loop pauses off-screen.
 export function CognitionEngine() {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -28,70 +29,32 @@ export function CognitionEngine() {
     const lite = !fine;
     const rnd = (a: number, b: number) => a + Math.random() * (b - a);
     const TAU = Math.PI * 2;
+
+    // Acid-lime energy; warm-dark machined metal.
     const L = (a: number) => `rgba(200,255,0,${a})`;
+    const METAL = 'rgba(16,18,11,1)';
+    const METAL_HI = 'rgba(26,29,18,1)';
+    const METAL_EDGE = 'rgba(52,58,36,1)';
 
     let w = 0, h = 0, cx = 0, cy = 0, s = 1, raf = 0, running = false, t = 0, last = 0;
     const mouse = { x: 0, y: 0, on: false };
     const off = { x: 0, y: 0 };
 
-    // --- dense neural mesh core (the AI brain) ---
-    const innerN = lite ? 5 : 8;
-    const outerN = lite ? 9 : 14;
-    type Node = { r: number; a: number; lit: number };
-    const inner: Node[] = Array.from({ length: innerN }, (_, i) => ({ r: 0.11, a: (i / innerN) * TAU, lit: 0 }));
-    const outer: Node[] = Array.from({ length: outerN }, (_, i) => ({ r: 0.21, a: (i / outerN) * TAU + 0.15, lit: 0 }));
-    type Edge = { from: Node; to: Node; pulse: number; sp: number; active: boolean };
-    const edges: Edge[] = [];
-    const mkEdge = (from: Node, to: Node) =>
-      edges.push({ from, to, pulse: Math.random(), sp: rnd(0.001, 0.0024), active: Math.random() > 0.45 });
-    outer.forEach((o, i) => {
-      mkEdge(o, inner[i % innerN]);
-      mkEdge(o, inner[(i + 2) % innerN]);
-      if (Math.random() > 0.6) mkEdge(o, outer[(i + 1) % outerN]);
-    });
-    inner.forEach((n, i) => mkEdge(n, inner[(i + 1) % innerN]));
-
-    // --- circuit traces on the RIGHT (the AI I/O) ---
-    const TRACE = lite ? 6 : 11;
-    type Trace = { a: number; step: number; rMid: number; rOut: number; mod: number; pulses: { p: number; sp: number }[] };
-    const traces: Trace[] = Array.from({ length: TRACE }, (_, i) => ({
-      a: -Math.PI * 0.46 + (i / (TRACE - 1)) * Math.PI * 0.92 + rnd(-0.04, 0.04), // right hemisphere
-      step: rnd(0.1, 0.26) * (Math.random() > 0.5 ? 1 : -1),
-      rMid: rnd(0.48, 0.66),
-      rOut: rnd(0.82, 0.97),
-      mod: Math.random() > 0.55 ? rnd(0.34, 0.46) : 0,
-      pulses: Array.from({ length: Math.random() > 0.5 ? 2 : 1 }, () => ({ p: Math.random(), sp: rnd(0.0006, 0.0014) })),
+    // The contained "mind": orbiting sparks that fire into the core (the glow).
+    const sparkN = lite ? 5 : 8;
+    const sparks = Array.from({ length: sparkN }, (_, i) => ({
+      a: (i / sparkN) * TAU,
+      r: rnd(0.05, 0.13),
+      sp: rnd(0.0003, 0.0009) * (Math.random() > 0.5 ? 1 : -1),
+      lit: Math.random(),
     }));
 
-    // --- branching organic dendrites on the LEFT (the human input) ---
-    type Seg = [number, number, number, number, number, number];
-    const bezPt = (a: number[], b: number[], c: number[], u: number): [number, number] => {
-      const k = 1 - u;
-      return [k * k * a[0] + 2 * k * u * b[0] + u * u * c[0], k * k * a[1] + 2 * k * u * b[1] + u * u * c[1]];
-    };
-    function buildDend(base: number): Seg[] {
-      const dx = Math.cos(base), dy = Math.sin(base);
-      const px = -dy, py = dx;
-      const len = rnd(0.6, 0.95);
-      const bow = rnd(-0.32, 0.32);
-      const m0 = [dx * 0.23, dy * 0.23];
-      const m2 = [dx * len + px * bow * 0.25, dy * len + py * bow * 0.25];
-      const m1 = [dx * len * 0.5 + px * bow, dy * len * 0.5 + py * bow];
-      const segs: Seg[] = [[m0[0], m0[1], m1[0], m1[1], m2[0], m2[1]]];
-      const bp = bezPt(m0, m1, m2, 0.55);
-      for (const sign of [1, -1]) {
-        const ba = base + sign * rnd(0.32, 0.62);
-        const bl = len * rnd(0.3, 0.5);
-        const e = [bp[0] + Math.cos(ba) * bl, bp[1] + Math.sin(ba) * bl];
-        const c = [bp[0] + Math.cos(ba) * bl * 0.5 + px * sign * 0.08, bp[1] + Math.sin(ba) * bl * 0.5 + py * sign * 0.08];
-        segs.push([bp[0], bp[1], c[0], c[1], e[0], e[1]]);
-      }
-      return segs;
-    }
-    const DEND = lite ? 3 : 5;
-    const dends = Array.from({ length: DEND }, (_, i) =>
-      buildDend(Math.PI * 0.62 + (i / (DEND - 1)) * Math.PI * 0.76),
-    );
+    // Intake ports around the rim: left = organic (brain), right = circuit (AI).
+    const portN = lite ? 8 : 12;
+    const ports = Array.from({ length: portN }, (_, i) => {
+      const a = (i / portN) * TAU - Math.PI / 2;
+      return { a, right: Math.cos(a) > 0.05, phase: i / portN };
+    });
 
     function resize() {
       const r = parent.getBoundingClientRect();
@@ -101,36 +64,6 @@ export function CognitionEngine() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       cx = w / 2; cy = h / 2; s = Math.min(w, h) / 2;
     }
-    const npos = (n: Node, ex: number, ey: number, spin: number): [number, number] => [
-      ex + Math.cos(n.a + spin) * n.r * s,
-      ey + Math.sin(n.a + spin) * n.r * s,
-    ];
-    function tracePts(tr: Trace, ex: number, ey: number, spin: number): [number, number][] {
-      const a = tr.a + spin;
-      const a2 = a + tr.step;
-      return [
-        [ex + Math.cos(a) * 0.24 * s, ey + Math.sin(a) * 0.24 * s],
-        [ex + Math.cos(a) * tr.rMid * s, ey + Math.sin(a) * tr.rMid * s],
-        [ex + Math.cos(a2) * tr.rMid * s, ey + Math.sin(a2) * tr.rMid * s],
-        [ex + Math.cos(a2) * tr.rOut * s, ey + Math.sin(a2) * tr.rOut * s],
-      ];
-    }
-    function polyAt(pts: [number, number][], u: number): [number, number] {
-      const segs = pts.length - 1;
-      const f = Math.min(0.9999, Math.max(0, u)) * segs;
-      const i = Math.floor(f);
-      const lt = f - i;
-      return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * lt, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * lt];
-    }
-    const hexPath = (ex: number, ey: number, r: number, rot: number) => {
-      ctx.beginPath();
-      for (let k = 0; k <= 6; k++) {
-        const a = (k / 6) * TAU + rot;
-        const x = ex + Math.cos(a) * r, y = ey + Math.sin(a) * r;
-        if (k === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-    };
 
     function frame(dt: number) {
       t += dt;
@@ -138,169 +71,278 @@ export function CognitionEngine() {
       const ty = mouse.on ? (mouse.y - cy) / s : 0;
       off.x += (tx - off.x) * 0.05;
       off.y += (ty - off.y) * 0.05;
-      const ex = cx + off.x * s * 0.04;
-      const ey = cy + off.y * s * 0.04;
-      const spin = reduce ? 0 : t * 0.00008 + off.x * 0.22;
+      const ex = cx + off.x * s * 0.05;
+      const ey = cy + off.y * s * 0.05;
+
+      // Polar → cartesian around the (parallaxed) engine centre.
+      const PX = (ang: number, rad: number) => ex + Math.cos(ang) * rad;
+      const PY = (ang: number, rad: number) => ey + Math.sin(ang) * rad;
+      const topLit = (ang: number) => Math.max(0, -Math.sin(ang)); // 1 at the top
 
       ctx.clearRect(0, 0, w, h);
-      ctx.globalCompositeOperation = 'lighter';
-      ctx.lineWidth = 1;
 
-      // faint data-grid (digital substrate), clipped to a disc
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(ex, ey, 0.82 * s, 0, TAU);
-      ctx.clip();
-      ctx.strokeStyle = L(0.035);
-      const gs = s * 0.13;
-      ctx.beginPath();
-      for (let gx = ex - s; gx < ex + s; gx += gs) {
-        ctx.moveTo(gx, ey - s);
-        ctx.lineTo(gx, ey + s);
-      }
-      for (let gy = ey - s; gy < ey + s; gy += gs) {
-        ctx.moveTo(ex - s, gy);
-        ctx.lineTo(ex + s, gy);
-      }
-      ctx.stroke();
-      ctx.restore();
-
-      // organic dendrites (the brain) — left, branching
-      for (const segs of dends) {
-        ctx.strokeStyle = L(0.16);
-        for (const sg of segs) {
-          ctx.beginPath();
-          ctx.moveTo(ex + sg[0] * s, ey + sg[1] * s);
-          ctx.quadraticCurveTo(ex + sg[2] * s, ey + sg[3] * s, ex + sg[4] * s, ey + sg[5] * s);
-          ctx.stroke();
-        }
-        for (const sg of segs) {
-          ctx.fillStyle = L(0.5);
-          ctx.beginPath();
-          ctx.arc(ex + sg[4] * s, ey + sg[5] * s, 1.5, 0, TAU);
-          ctx.fill();
-        }
-      }
-
-      // machine housing — counter-rotating hex frames + vertex bolts
-      for (const hx of [
-        { r: 0.8, sp: 0.00012, base: 0 },
-        { r: 0.58, sp: -0.0002, base: Math.PI / 6 },
-      ]) {
-        const rot = (reduce ? 0 : t * hx.sp) + off.x * 0.3 + hx.base;
-        ctx.strokeStyle = L(0.16);
-        hexPath(ex, ey, hx.r * s, rot);
-        ctx.stroke();
-        for (let k = 0; k < 6; k++) {
-          const a = (k / 6) * TAU + rot;
-          ctx.fillStyle = L(0.5);
-          ctx.beginPath();
-          ctx.arc(ex + Math.cos(a) * hx.r * s, ey + Math.sin(a) * hx.r * s, 2, 0, TAU);
-          ctx.fill();
-        }
-      }
-      // turbine blade ring (the engine)
-      const bRot = reduce ? 0 : t * 0.0002;
-      const blades = lite ? 20 : 34;
-      ctx.strokeStyle = L(0.16);
-      for (let k = 0; k < blades; k++) {
-        const a = (k / blades) * TAU + bRot;
-        ctx.beginPath();
-        ctx.moveTo(ex + Math.cos(a) * 0.66 * s, ey + Math.sin(a) * 0.66 * s);
-        ctx.lineTo(ex + Math.cos(a + 0.07) * 0.73 * s, ey + Math.sin(a + 0.07) * 0.73 * s);
-        ctx.stroke();
-      }
-      // asymmetric arc brackets
-      const arcRot = reduce ? 0 : t * 0.00007;
-      ctx.setLineDash([4, 9]);
-      ctx.strokeStyle = L(0.1);
-      ctx.beginPath();
-      ctx.arc(ex, ey, 0.93 * s, arcRot - 0.5, arcRot + 1.3);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(ex, ey, 0.93 * s, arcRot + Math.PI - 0.5, arcRot + Math.PI + 1.3);
-      ctx.stroke();
+      // ============================================================
+      // PASS A — the SOLID body (opaque, occludes the background)
+      // ============================================================
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
       ctx.setLineDash([]);
 
-      // circuit traces (the AI) — right, with pads, modules and data pulses
-      for (const tr of traces) {
-        const pts = tracePts(tr, ex, ey, spin * 0.5);
-        ctx.strokeStyle = L(0.1);
-        ctx.beginPath();
-        ctx.moveTo(pts[0][0], pts[0][1]);
-        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
-        ctx.stroke();
-        const pad = pts[pts.length - 1];
-        ctx.strokeStyle = L(0.42);
-        ctx.strokeRect(pad[0] - 3, pad[1] - 3, 6, 6);
-        if (tr.mod) {
-          const [mx, my] = polyAt(pts, tr.mod);
-          ctx.strokeStyle = L(0.3);
-          ctx.strokeRect(mx - 4, my - 2.5, 8, 5);
-        }
-        for (const pu of tr.pulses) {
-          if (!reduce) {
-            pu.p -= pu.sp * dt;
-            if (pu.p <= 0) pu.p = 1;
-          }
-          for (let k = 0; k < 4; k++) {
-            const [qx, qy] = polyAt(pts, Math.min(1, pu.p + k * 0.02));
-            ctx.fillStyle = L((1 - k / 4) * 0.65);
-            ctx.fillRect(qx - 1.4, qy - 1.4, 2.8, 2.8);
-          }
-        }
-      }
+      // Engine face plate — lit from above (linear gradient = a real surface).
+      const face = ctx.createLinearGradient(ex, ey - 0.86 * s, ex, ey + 0.86 * s);
+      face.addColorStop(0, 'rgba(30,33,21,1)');
+      face.addColorStop(0.5, 'rgba(15,17,11,1)');
+      face.addColorStop(1, 'rgba(7,8,5,1)');
+      ctx.fillStyle = face;
+      ctx.beginPath();
+      ctx.arc(ex, ey, 0.85 * s, 0, TAU);
+      ctx.fill();
 
-      // neural mesh edges + activations
-      for (const e of edges) {
-        const [ax, ay] = npos(e.from, ex, ey, spin);
-        const [bx, by] = npos(e.to, ex, ey, spin);
-        if (!reduce && e.active) {
-          e.pulse -= e.sp * dt;
-          if (e.pulse <= 0) {
-            e.pulse = 1;
-            e.to.lit = 1;
-            e.active = Math.random() > 0.22;
-          }
-        }
-        ctx.strokeStyle = L(0.1 + (e.active ? 0.06 : 0));
-        ctx.beginPath();
-        ctx.moveTo(ax, ay);
-        ctx.lineTo(bx, by);
-        ctx.stroke();
-        if (e.active && !reduce) {
-          const px = ax + (bx - ax) * (1 - e.pulse);
-          const py = ay + (by - ay) * (1 - e.pulse);
-          ctx.fillStyle = L(0.9);
+      // Machined outer rim + a top highlight where the light catches the bevel.
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = METAL_EDGE;
+      ctx.beginPath();
+      ctx.arc(ex, ey, 0.845 * s, 0, TAU);
+      ctx.stroke();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = L(0.32);
+      ctx.beginPath();
+      ctx.arc(ex, ey, 0.845 * s, -2.5, -0.7);
+      ctx.stroke();
+
+      // Outer ring band that holds the intake ports.
+      ctx.fillStyle = METAL_HI;
+      ctx.beginPath();
+      ctx.arc(ex, ey, 0.84 * s, 0, TAU);
+      ctx.arc(ex, ey, 0.76 * s, 0, TAU, true);
+      ctx.fill('evenodd');
+
+      // Intake ports — solid bezels; left rounded (organic), right square (circuit).
+      for (const p of ports) {
+        const a = p.a + (reduce ? 0 : t * 0.00003);
+        const pr = 0.8 * s;
+        const bx = PX(a, pr), by = PY(a, pr);
+        const bz = 0.032 * s;
+        ctx.fillStyle = METAL_EDGE;
+        if (p.right) {
+          ctx.save();
+          ctx.translate(bx, by);
+          ctx.rotate(a);
+          ctx.fillRect(-bz, -bz, bz * 2, bz * 2);
+          ctx.fillStyle = 'rgba(9,10,6,1)';
+          ctx.fillRect(-bz * 0.55, -bz * 0.55, bz * 1.1, bz * 1.1);
+          ctx.restore();
+        } else {
           ctx.beginPath();
-          ctx.arc(px, py, 1.6, 0, TAU);
+          ctx.arc(bx, by, bz, 0, TAU);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(9,10,6,1)';
+          ctx.beginPath();
+          ctx.arc(bx, by, bz * 0.55, 0, TAU);
           ctx.fill();
         }
       }
-      for (const n of [...inner, ...outer]) {
-        const [nx, ny] = npos(n, ex, ey, spin);
-        n.lit *= 0.93;
-        ctx.fillStyle = L(0.45 + n.lit * 0.55);
+
+      // Rim bolts (solid, with a top catch-light).
+      for (let k = 0; k < 8; k++) {
+        const a = (k / 8) * TAU + Math.PI / 8;
+        const bx = PX(a, 0.815 * s), by = PY(a, 0.815 * s);
+        ctx.fillStyle = METAL;
         ctx.beginPath();
-        ctx.arc(nx, ny, 1.7 + n.lit * 2.2, 0, TAU);
+        ctx.arc(bx, by, 0.016 * s, 0, TAU);
         ctx.fill();
+        ctx.strokeStyle = L(0.12 + 0.3 * topLit(a));
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(bx, by, 0.016 * s, 0, TAU);
+        ctx.stroke();
       }
 
-      // core processor chip (hex housing around the neural core)
-      ctx.strokeStyle = L(0.3);
-      hexPath(ex, ey, 0.28 * s, reduce ? 0 : -t * 0.00022);
+      // Turbine fan — filled, skewed vanes (a solid rotor, top edges catch light).
+      const tRot = reduce ? 0 : t * 0.00022;
+      const vanes = lite ? 14 : 22;
+      const tIn = 0.56 * s, tOut = 0.74 * s, aw = (TAU / vanes) * 0.46, skew = 0.16;
+      for (let k = 0; k < vanes; k++) {
+        const a = (k / vanes) * TAU + tRot;
+        // each vane is lit by a gradient across its span — a curved metal blade
+        const vg = ctx.createLinearGradient(PX(a, tIn), PY(a, tIn), PX(a + skew, tOut), PY(a + skew, tOut));
+        vg.addColorStop(0, 'rgba(22,25,15,1)');
+        vg.addColorStop(1, METAL_HI);
+        ctx.fillStyle = vg;
+        ctx.beginPath();
+        ctx.moveTo(PX(a - aw, tIn), PY(a - aw, tIn));
+        ctx.lineTo(PX(a + aw, tIn), PY(a + aw, tIn));
+        ctx.lineTo(PX(a + aw + skew, tOut), PY(a + aw + skew, tOut));
+        ctx.lineTo(PX(a - aw + skew, tOut), PY(a - aw + skew, tOut));
+        ctx.closePath();
+        ctx.fill();
+        // leading edge highlight, brightest near the top of the rotor
+        ctx.strokeStyle = L(0.14 + 0.46 * topLit(a));
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(PX(a - aw, tIn), PY(a - aw, tIn));
+        ctx.lineTo(PX(a - aw + skew, tOut), PY(a - aw + skew, tOut));
+        ctx.stroke();
+      }
+      // rotor inner/outer hairlines so the fan reads as one ring
+      ctx.strokeStyle = METAL_EDGE;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(ex, ey, tIn, 0, TAU);
+      ctx.moveTo(ex + tOut, ey);
+      ctx.arc(ex, ey, tOut, 0, TAU);
       ctx.stroke();
 
-      // core glow
-      const cr = s * 0.05 * (1 + 0.1 * Math.sin(t * 0.004));
-      const g = ctx.createRadialGradient(ex, ey, 0, ex, ey, cr * 3.4);
-      g.addColorStop(0, 'rgba(255,255,255,0.9)');
-      g.addColorStop(0.3, L(0.55));
-      g.addColorStop(1, L(0));
-      ctx.fillStyle = g;
+      // Toothed gear — counter-rotating filled ring with trapezoidal teeth.
+      const gRot = reduce ? 0 : -t * 0.00018;
+      const gIn = 0.44 * s, gOut = 0.49 * s, gTooth = 0.535 * s, gTeeth = lite ? 16 : 24;
+      ctx.fillStyle = METAL_HI;
       ctx.beginPath();
-      ctx.arc(ex, ey, cr * 3.4, 0, TAU);
+      ctx.arc(ex, ey, gOut, 0, TAU);
+      ctx.arc(ex, ey, gIn, 0, TAU, true);
+      ctx.fill('evenodd');
+      for (let k = 0; k < gTeeth; k++) {
+        const a = (k / gTeeth) * TAU + gRot;
+        const a1 = a - 0.045, a2 = a + 0.045;
+        ctx.fillStyle = METAL;
+        ctx.beginPath();
+        ctx.moveTo(PX(a1, gOut), PY(a1, gOut));
+        ctx.lineTo(PX(a1, gTooth), PY(a1, gTooth));
+        ctx.lineTo(PX(a2, gTooth), PY(a2, gTooth));
+        ctx.lineTo(PX(a2, gOut), PY(a2, gOut));
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = L(0.12 + 0.42 * topLit(a));
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+      ctx.strokeStyle = L(0.16);
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.arc(ex, ey, gIn, 0, TAU);
+      ctx.moveTo(ex + gOut, ey);
+      ctx.arc(ex, ey, gOut, 0, TAU);
+      ctx.stroke();
+
+      // Stator ring with notch ticks (fixed) — frames the iris.
+      ctx.fillStyle = METAL_HI;
+      ctx.beginPath();
+      ctx.arc(ex, ey, 0.43 * s, 0, TAU);
+      ctx.arc(ex, ey, 0.40 * s, 0, TAU, true);
+      ctx.fill('evenodd');
+      ctx.strokeStyle = L(0.14);
+      ctx.lineWidth = 1;
+      for (let k = 0; k < 36; k++) {
+        const a = (k / 36) * TAU;
+        ctx.beginPath();
+        ctx.moveTo(PX(a, 0.405 * s), PY(a, 0.405 * s));
+        ctx.lineTo(PX(a, 0.425 * s), PY(a, 0.425 * s));
+        ctx.stroke();
+      }
+
+      // Mechanical iris — overlapping swirled blades; the aperture breathes open.
+      const irisRot = reduce ? 0 : t * 0.00004;
+      const breathe = 0.5 + 0.5 * Math.sin(t * 0.0011);
+      const ap = (0.15 + 0.04 * breathe) * s;
+      const rIris = 0.4 * s, irisN = 7, twist = 0.7;
+      for (let k = 0; k < irisN; k++) {
+        const b = (k / irisN) * TAU + irisRot;
+        const wO = (Math.PI / irisN) * 1.5;
+        const iA = b - twist, iB = iA + TAU / irisN;
+        const mid = (iA + iB) / 2;
+        ctx.beginPath();
+        ctx.moveTo(PX(b - wO, rIris), PY(b - wO, rIris));
+        ctx.lineTo(PX(b + wO, rIris), PY(b + wO, rIris));
+        ctx.lineTo(PX(iB, ap), PY(iB, ap));
+        ctx.quadraticCurveTo(PX(mid, ap * 0.74), PY(mid, ap * 0.74), PX(iA, ap), PY(iA, ap));
+        ctx.closePath();
+        ctx.fillStyle = k % 2 ? METAL : METAL_HI; // alternate blades read as overlap
+        ctx.fill();
+        ctx.strokeStyle = L(0.22);
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(PX(iB, ap), PY(iB, ap));
+        ctx.quadraticCurveTo(PX(mid, ap * 0.74), PY(mid, ap * 0.74), PX(iA, ap), PY(iA, ap));
+        ctx.stroke();
+      }
+
+      // ============================================================
+      // PASS B — the GLOW (additive): the contained, living energy
+      // ============================================================
+      ctx.globalCompositeOperation = 'lighter';
+
+      // Ambient bloom so the engine casts light into the hero (not a flat sticker).
+      const bloom = ctx.createRadialGradient(ex, ey, 0.3 * s, ex, ey, 1.25 * s);
+      bloom.addColorStop(0, L(0.12));
+      bloom.addColorStop(1, L(0));
+      ctx.fillStyle = bloom;
+      ctx.beginPath();
+      ctx.arc(ex, ey, 1.25 * s, 0, TAU);
       ctx.fill();
+
+      // The mind — plasma core + firing sparks, contained behind the iris.
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(ex, ey, ap * 0.96, 0, TAU);
+      ctx.clip();
+      const pr = ap * (1.02 + 0.06 * Math.sin(t * 0.004));
+      const core = ctx.createRadialGradient(ex, ey, 0, ex, ey, pr);
+      core.addColorStop(0, 'rgba(255,255,255,0.95)');
+      core.addColorStop(0.28, L(0.75));
+      core.addColorStop(0.7, L(0.22));
+      core.addColorStop(1, L(0));
+      ctx.fillStyle = core;
+      ctx.beginPath();
+      ctx.arc(ex, ey, pr, 0, TAU);
+      ctx.fill();
+      for (const sp of sparks) {
+        if (!reduce) {
+          sp.a += sp.sp * dt;
+          sp.lit *= 0.94;
+          if (Math.random() < 0.02) sp.lit = 1;
+        }
+        const sx = PX(sp.a, sp.r * s), sy = PY(sp.a, sp.r * s);
+        if (sp.lit > 0.3) {
+          ctx.strokeStyle = L(0.15 + sp.lit * 0.5);
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(sx, sy);
+          ctx.lineTo(ex, ey);
+          ctx.stroke();
+        }
+        ctx.fillStyle = L(0.35 + sp.lit * 0.6);
+        ctx.beginPath();
+        ctx.arc(sx, sy, 1.1 + sp.lit * 1.8, 0, TAU);
+        ctx.fill();
+      }
+      ctx.restore();
+
+      // The hot edge of the aperture.
+      ctx.strokeStyle = L(0.4);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(ex, ey, ap, 0, TAU);
+      ctx.stroke();
+
+      // Intake ports light up and feed the core as the engine breathes.
+      for (const p of ports) {
+        const a = p.a + (reduce ? 0 : t * 0.00003);
+        const glow = reduce ? 0.5 : 0.5 + 0.5 * Math.sin(t * 0.0016 + p.phase * TAU);
+        const bx = PX(a, 0.8 * s), by = PY(a, 0.8 * s);
+        ctx.fillStyle = L(0.2 + glow * 0.6);
+        ctx.beginPath();
+        ctx.arc(bx, by, 1.4 + glow * 1.4, 0, TAU);
+        ctx.fill();
+        if (glow > 0.7) {
+          ctx.strokeStyle = L((glow - 0.7) * 0.8);
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(bx, by);
+          ctx.lineTo(PX(a, 0.56 * s), PY(a, 0.56 * s));
+          ctx.stroke();
+        }
+      }
     }
 
     function tick(now: number) {
