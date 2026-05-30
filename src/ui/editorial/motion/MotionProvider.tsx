@@ -60,20 +60,33 @@ export function MotionProvider() {
         0.2,
       );
 
-      // Staggered fade-up reveals as sections enter the viewport.
-      ScrollTrigger.batch('[data-animate]', {
-        start: 'top 88%',
+      // Reveal-on-scroll. Elements already in (or above) the viewport on load
+      // are shown instantly so nothing can be stuck hidden after a fast jump or
+      // a reload mid-page; only below-the-fold elements get the scroll reveal.
+      const targets = gsap.utils.toArray<HTMLElement>('[data-animate]');
+      const belowFold = targets.filter(
+        (el) => el.getBoundingClientRect().top >= window.innerHeight,
+      );
+      const alreadyVisible = targets.filter(
+        (el) => el.getBoundingClientRect().top < window.innerHeight,
+      );
+      gsap.set(alreadyVisible, { opacity: 1, y: 0 });
+
+      // Fire once, the moment an element enters from the bottom. Short duration
+      // + small stagger so fast scrolling never leaves a blank-then-pop frame.
+      ScrollTrigger.batch(belowFold, {
+        start: 'top bottom-=60',
+        once: true,
         onEnter: (batch) =>
           gsap.fromTo(
             batch,
-            { y: 24, opacity: 0 },
+            { y: 16, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.8,
-              ease: 'power3.out',
-              stagger: 0.08,
-              overwrite: true,
+              duration: 0.5,
+              ease: 'power2.out',
+              stagger: 0.05,
             },
           ),
       });

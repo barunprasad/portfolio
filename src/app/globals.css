@@ -28,13 +28,13 @@
 
   body {
     background-color: var(--color-canvas);
-    /* Faint fixed dot grid for texture/depth. */
+    /* Faint dot grid for texture/depth (scrolls with the page — no fixed
+       attachment, which forces full-viewport repaints and causes scroll flicker). */
     background-image: radial-gradient(
       rgba(237, 237, 237, 0.025) 1px,
       transparent 1px
     );
     background-size: 28px 28px;
-    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
