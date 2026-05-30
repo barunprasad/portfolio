@@ -1,0 +1,252 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ── Canvas + accent — committed dark theme ─────────────────────────── */
+  --color-canvas: #0a0a0b; /* page background */
+  --color-surface: #121214; /* cards, hover surfaces */
+  --color-ink: #ededed; /* primary text */
+  --color-muted: #8a8a8e; /* secondary text, mono labels */
+  --color-line: #26262a; /* hairlines, dividers */
+  --color-accent: #c8ff00; /* acid lime — locked accent */
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-general-sans), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+}
+
+@layer base {
+  /* Native smooth scroll only when Lenis is NOT driving (no-JS fallback). */
+  html:not(.lenis) {
+    scroll-behavior: smooth;
+  }
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    /* Faint dot grid for texture/depth (scrolls with the page — no fixed
+       attachment, which forces full-viewport repaints and causes scroll flicker). */
+    background-image: radial-gradient(
+      rgba(237, 237, 237, 0.025) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #0a0a0b;
+  }
+
+  /* Visible, on-brand keyboard focus indicator for all interactive elements. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Lenis smooth-scroll baseline styles. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+
+  /* Reduced motion: kill transitions/animations entirely (content stays put). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Reveal targets start hidden ONLY when scripting is enabled and motion is
+     allowed, so GSAP can animate them in. Uses the `scripting` media feature
+     (no class on <html>, so no hydration mismatch). Crawlers / no-JS /
+     reduced-motion / unsupported browsers see everything. */
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    [data-animate],
+    [data-hero-fade] {
+      opacity: 0;
+    }
+  }
+}
+
+@layer components {
+  /* Animated underline that wipes in on hover. */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Skills marquee — full-bleed infinite ticker (two identical tracks chained). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+  animation-duration: 46s;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Hero name spotlight — only active on fine-pointer desktops (data-spotlight set
+   by SpotlightName). The name dims to grey and brightens where the cursor is. */
+[data-spotlight='on'] {
+  background-image: radial-gradient(
+    18rem 18rem at var(--sx, 50%) var(--sy, 50%),
+    var(--color-accent) 0%,
+    var(--color-accent) 10%,
+    #d2d2d6 55%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Cursor-reactive 3D tilt (vars set by TiltCard; flat by default). */
+.tilt {
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none !important;
+    transition: none;
+  }
+}
+
+/* Hero aurora — slow drifting gradient blobs. */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.aurora-1 {
+  width: 34rem;
+  height: 34rem;
+  top: -8rem;
+  left: -6rem;
+  background: radial-gradient(circle, rgba(200, 255, 0, 0.18), transparent 68%);
+  animation: drift-a 20s ease-in-out infinite alternate;
+}
+.aurora-2 {
+  width: 28rem;
+  height: 28rem;
+  top: 18%;
+  right: -6rem;
+  background: radial-gradient(circle, rgba(120, 230, 180, 0.12), transparent 68%);
+  animation: drift-b 24s ease-in-out infinite alternate;
+}
+.aurora-3 {
+  width: 26rem;
+  height: 26rem;
+  bottom: -6rem;
+  left: 28%;
+  background: radial-gradient(circle, rgba(200, 255, 0, 0.1), transparent 70%);
+  animation: drift-c 28s ease-in-out infinite alternate;
+}
+@keyframes drift-a {
+  to {
+    transform: translate(8rem, 5rem) scale(1.2);
+  }
+}
+@keyframes drift-b {
+  to {
+    transform: translate(-6rem, 4rem) scale(1.1);
+  }
+}
+@keyframes drift-c {
+  to {
+    transform: translate(4rem, -5rem) scale(1.15);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none;
+  }
+}
+
+/* Subtle film grain overlay for depth. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce) {
+  .grain {
+    display: none;
+  }
+}

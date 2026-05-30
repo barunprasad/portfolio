@@ -7,8 +7,9 @@ import { LearningData } from './learning';
 
 export const IntroSectionData = {
   title: 'Barun Prasad',
-  subTitle: 'Frontend Evangelist',
-  description: 'Transforming ideas into creative solutions.',
+  subTitle: 'Director of Technology',
+  description:
+    'Engineering leadership rooted in frontend craft — design systems, platform architecture, and AI-assisted delivery.',
 };
 
 // Type-safe sections with discriminated unions

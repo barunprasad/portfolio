@@ -2,11 +2,9 @@ import { AboutContent } from '@/types/content';
 
 export const AboutData: AboutContent[] = [
   {
-    description: `Frontend Engineering Leader with 18+ years in architecting scalable,
-          mobile-first web applications and cross-platform mobile apps.
-          Proficient in React ecosystem, frontend design systems, and backend
-          integration, with extensive expertise in accessibility, modular CSS,
-          and performance optimization. Proven record of leading teams and
-          delivering high-impact projects in Agile environments.`,
+    // Kept as a single line so the lime keyword highlighting matches exactly
+    // (phrases must not be split across line breaks). Mirror this in Hygraph.
+    description:
+      "I'm an engineering leader who came up through frontend craft. Over 19 years I've architected scalable, mobile-first web and cross-platform apps, built design systems that move teams faster, and led engineers across India and the US. I pair deep frontend fundamentals — React, accessibility, performance — with platform and design-system strategy, and increasingly build with AI to ship high-impact products without compromising quality.",
   },
 ];

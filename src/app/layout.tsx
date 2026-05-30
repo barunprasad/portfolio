@@ -1,21 +1,15 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.scss';
-import '@pigment-css/react/styles.css';
-import '@arctic-kit/snow/style.css';
+import './globals.css';
 import { siteMetadata } from './siteMetadata';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '900'],
-});
+import { inter, generalSans, GeistMono } from './fonts';
 
 export const metadata: Metadata = { ...siteMetadata };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#0a0a0b',
+  colorScheme: 'dark',
 };
 
 export default function RootLayout({
@@ -24,8 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="theme-dark">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html
+      lang="en"
+      className={`${inter.variable} ${generalSans.variable} ${GeistMono.variable}`}
+    >
+      <body className="font-sans antialiased">
+        {children}
+        <div className="grain" aria-hidden="true" />
+      </body>
     </html>
   );
 }

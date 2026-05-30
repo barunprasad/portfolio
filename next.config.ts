@@ -1,36 +1,6 @@
 import type { NextConfig } from 'next';
-import { withPigment, extendTheme } from '@pigment-css/nextjs-plugin';
-import {
-  createDefaultTheme,
-  createTheme,
-  createColorTheme,
-} from '@arctic-kit/snow';
-import { mint, slate } from '@arctic-kit/colors';
-
-const lightTheme = createDefaultTheme();
-const darkTheme = createDefaultTheme(true);
-darkTheme.colors.secondary = {
-  ...mint,
-  main: mint[500],
-};
-
-darkTheme.colors.primary = {
-  ...slate,
-  main: slate[500],
-};
-
-const theme = extendTheme({
-  colorSchemes: {
-    light: lightTheme,
-    dark: darkTheme,
-  },
-  cssVarPrefix: 'snow',
-  getSelector: (colorScheme) =>
-    colorScheme ? `.theme-${colorScheme}` : ':root',
-});
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -48,14 +18,6 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: true,
   },
-  // Removed 'output: export' to enable ISR
 };
 
-const configWithPigment = withPigment(
-  { ...nextConfig },
-  {
-    theme,
-  },
-);
-
-export default configWithPigment;
+export default nextConfig;
