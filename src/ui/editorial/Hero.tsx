@@ -3,7 +3,7 @@ import type { IntroSectionData, SocialLinkData } from '@/lib/data-provider';
 import { Container } from './Container';
 import { SocialRow } from './SocialRow';
 import { HeroAurora } from './HeroAurora';
-import { HeroNetwork } from './motion/HeroNetwork';
+import { CognitionEngine } from './motion/CognitionEngine';
 import { RotatingText } from './motion/RotatingText';
 import { SpotlightName } from './motion/SpotlightName';
 import { LocalTime } from './motion/LocalTime';
@@ -43,48 +43,60 @@ export function Hero({
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-28"
     >
       <HeroAurora />
-      <HeroNetwork />
 
-      <Container className="relative z-10">
-        <div
-          data-hero-fade
-          className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-muted"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 motion-safe:animate-ping" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          <RotatingText items={roles} />
-        </div>
-
-        <SpotlightName
-          text={intro.title}
-          className="mt-6 font-display text-[clamp(2.75rem,11vw,8.5rem)] font-semibold leading-[0.92] tracking-[-0.02em] text-ink"
-        />
-
-        <p
-          data-hero-fade
-          className="mt-8 max-w-xl text-balance text-lg text-muted sm:text-2xl"
-        >
-          {intro.description}
-        </p>
-
-        <dl
-          data-hero-fade
-          className="mt-12 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8 lg:grid-cols-4"
-        >
-          {meta.map((m) => (
-            <div key={m.label}>
-              <dt className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
-                {m.label}
-              </dt>
-              <dd className="mt-1.5 text-sm text-ink">{m.value}</dd>
+      <Container className="relative z-10 w-full">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+          {/* Left — the words */}
+          <div>
+            <div
+              data-hero-fade
+              className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-muted"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 motion-safe:animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              <RotatingText items={roles} />
             </div>
-          ))}
-        </dl>
 
-        <div data-hero-fade className="mt-12">
-          <SocialRow links={socialLinks} />
+            <SpotlightName
+              text={intro.title}
+              className="mt-6 font-display text-[clamp(2.5rem,6.5vw,5.25rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-ink"
+            />
+
+            <p
+              data-hero-fade
+              className="mt-6 max-w-md text-balance text-lg text-muted sm:text-xl"
+            >
+              {intro.description}
+            </p>
+
+            <dl
+              data-hero-fade
+              className="mt-10 grid max-w-md grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8"
+            >
+              {meta.map((m) => (
+                <div key={m.label}>
+                  <dt className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                    {m.label}
+                  </dt>
+                  <dd className="mt-1.5 text-sm text-ink">{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div data-hero-fade className="mt-10">
+              <SocialRow links={socialLinks} />
+            </div>
+          </div>
+
+          {/* Right — the masterpiece */}
+          <div
+            data-hero-fade
+            className="relative mx-auto aspect-square w-full max-w-sm sm:max-w-md lg:max-w-none"
+          >
+            <CognitionEngine />
+          </div>
         </div>
       </Container>
 
