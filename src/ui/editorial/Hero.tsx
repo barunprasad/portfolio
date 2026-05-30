@@ -33,7 +33,7 @@ export function Hero({
       ),
     },
     { label: 'Currently', value: 'Code & Theory' },
-    { label: 'Focus', value: 'Strategic Leadership · Design Systems · AI' },
+    { label: 'Focus', value: 'Strategic Leadership' },
   ];
 
   return (
