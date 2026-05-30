@@ -4,7 +4,7 @@ import { Container } from './Container';
 const STATS = [
   { value: '18+', label: 'Years in engineering' },
   { value: '40%', label: 'Faster delivery via design systems' },
-  { value: '93%', label: 'Fewer checkout failures at Walmart' },
+  { value: '93%', label: 'Fewer POS transaction failures' },
   { value: '30%', label: 'Lower code complexity' },
 ];
 
