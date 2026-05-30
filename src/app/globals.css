@@ -147,10 +147,10 @@
    by SpotlightName). The name dims to grey and brightens where the cursor is. */
 [data-spotlight='on'] {
   background-image: radial-gradient(
-    20rem 20rem at var(--sx, 50%) var(--sy, 50%),
-    #ffffff 0%,
-    var(--color-ink) 12%,
-    #54545b 55%
+    18rem 18rem at var(--sx, 50%) var(--sy, 50%),
+    var(--color-accent) 0%,
+    var(--color-accent) 10%,
+    #d2d2d6 55%
   );
   -webkit-background-clip: text;
   background-clip: text;
