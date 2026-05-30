@@ -2,10 +2,10 @@ import { Container } from './Container';
 
 // Headline metrics surfaced from the experience history.
 const STATS = [
-  { value: '18+', label: 'Years in frontend' },
-  { value: '40%', label: 'Faster feature delivery' },
-  { value: '<2%', label: 'Checkout failure (from 30%+)' },
-  { value: '30%', label: 'Less code complexity' },
+  { value: '18+', label: 'Years in engineering' },
+  { value: '40%', label: 'Faster delivery via design systems' },
+  { value: '93%', label: 'Fewer checkout failures at Walmart' },
+  { value: '30%', label: 'Lower code complexity' },
 ];
 
 export function StatsBand() {
